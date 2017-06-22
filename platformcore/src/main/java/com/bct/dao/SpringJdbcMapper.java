@@ -5,14 +5,9 @@ import com.bct.model.PaymentTransaction;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 
-import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.TimeZone;
 
 /**
  * Created by timy on 6/8/17.
@@ -33,7 +28,7 @@ public class SpringJdbcMapper {
     /**
      *
      */
-    public static class PaymentTransactionRowMapper implements  RowMapper<PaymentTransaction> {
+    public static class PaymentTransactionRowMapper implements RowMapper<PaymentTransaction> {
         public PaymentTransaction mapRow(ResultSet rs, int rowNum) throws SQLException {
             PaymentTransaction paymentTransaction = new PaymentTransaction();
             paymentTransaction.setMerchantId(rs.getInt("MERCHANT_ID"));
@@ -50,7 +45,7 @@ public class SpringJdbcMapper {
         }
     }
 
-    public static class PaymentTransactionSummaryReportRowMapper implements  RowMapper<PaymentTransaction> {
+    public static class PaymentTransactionSummaryReportRowMapper implements RowMapper<PaymentTransaction> {
         public PaymentTransaction mapRow(ResultSet rs, int rowNum) throws SQLException {
             PaymentTransaction paymentTransaction = new PaymentTransaction();
             paymentTransaction.setMerchantId(rs.getInt("MERCHANT_ID"));
@@ -82,8 +77,8 @@ public class SpringJdbcMapper {
             ps.setString(11, paymentTransaction.getState());
             ps.setString(12, paymentTransaction.getPostalCode());
             ps.setString(13, paymentTransaction.getTransactionId());
-            ps.setInt(14,paymentTransaction.getMerchantId());
-            ps.setString(15,paymentTransaction.getOrderNumber());
+            ps.setInt(14, paymentTransaction.getMerchantId());
+            ps.setString(15, paymentTransaction.getOrderNumber());
             ps.setInt(16, paymentTransaction.getIsRecurring());
         }
     }

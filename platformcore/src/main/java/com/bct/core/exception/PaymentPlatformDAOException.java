@@ -7,7 +7,8 @@ public class PaymentPlatformDAOException extends Exception {
     public PaymentPlatformDAOException(String message) {
         super();
     }
-    public  PaymentPlatformDAOException(Exception e) {
+
+    public PaymentPlatformDAOException(Exception e) {
         super();
     }
 }

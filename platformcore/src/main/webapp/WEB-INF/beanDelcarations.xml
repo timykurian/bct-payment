@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
 
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
@@ -8,36 +8,37 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:config.properties" />
-        <property name="ignoreResourceNotFound" value="true" />
+        <property name="location" value="classpath:config.properties"/>
+        <property name="ignoreResourceNotFound" value="true"/>
     </bean>
 
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="${database.url}" />
-        <property name="username" value="${database.username}" />
-        <property name="password" value="${database.password}" />
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="${database.url}"/>
+        <property name="username" value="${database.username}"/>
+        <property name="password" value="${database.password}"/>
     </bean>
 
-    <bean id="configurationHelper" class="com.bct.utils.PaymentConfigurationHelper" init-method = "init" autowire="byType">
-        <property name="dataSource" ref="dataSource" />
+    <bean id="configurationHelper" class="com.bct.utils.PaymentConfigurationHelper" init-method="init"
+          autowire="byType">
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 
     <bean id="paymentPlatformDAO" class="com.bct.dao.PaymentPlatformDAOImpl">
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="paymentCoreService" class="com.bct.service.PaymentServiceImpl" autowire="byType">
+    <bean id="paymentCoreService" class="com.bct.service.PaymentServiceImpl">
         <property name="paymentPlatformDAO" ref="paymentPlatformDAO"/>
     </bean>
 
-    <bean id="serviceLoggingInterceptor" class="com.bct.core.ActivityInterceptor" />
+    <bean id="serviceLoggingInterceptor" class="com.bct.core.ActivityInterceptor"/>
 
     <bean id="serviceLoggingInterceptorAdv"
           class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
-        <property name="mappedName" value="*" />
-         <property name="advice" ref="serviceLoggingInterceptor" />
+        <property name="mappedName" value="*"/>
+        <property name="advice" ref="serviceLoggingInterceptor"/>
     </bean>
 
     <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">

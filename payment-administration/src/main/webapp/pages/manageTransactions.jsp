@@ -6,8 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+         pageEncoding="ISO-8859-1" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <head>
 
@@ -24,16 +24,16 @@
     <!-- /.col-lg-12 -->
     <form role="form">
         <div class="form-group input-group">
-            <label class="control-label"    >Order Number</label>
+            <label class="control-label">Order Number</label>
             <input type="text" class="form-control" ng-model="orderNo" width="100px">
             <span class="input-group-btn" width="100px">
-                <button class="btn btn-default" type="button" ng-click="searchOrderDetails()"><i class="fa fa-search"></i>
+                <button class="btn btn-default" type="button" ng-click="searchOrderDetails()"><i
+                        class="fa fa-search"></i>
                 </button>
              </span>
         </div>
     </form>
 </div>
-
 
 
 </body>

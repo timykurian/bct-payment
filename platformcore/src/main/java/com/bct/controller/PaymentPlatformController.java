@@ -5,8 +5,9 @@ import com.bct.partner.twocheckout.TwoCheckoutService;
 import com.bct.service.PaymentServiceImpl;
 import com.bct.utils.PaymentConfigurationHelper;
 import com.google.gson.Gson;
-import com.twocheckout.*;
-import com.twocheckout.model.*;
+import com.twocheckout.TwocheckoutException;
+import com.twocheckout.TwocheckoutResponse;
+import com.twocheckout.model.Sale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -36,29 +37,28 @@ public class PaymentPlatformController {
      * @param merchantId
      * @return
      */
-    @RequestMapping(value = "/merchant/{merchantId}/config",method = RequestMethod.GET)
-    public String findMerchantConfiguration(@PathVariable  int merchantId,ModelMap model) {
+    @RequestMapping(value = "/merchant/{merchantId}/config", method = RequestMethod.GET)
+    public String findMerchantConfiguration(@PathVariable int merchantId, ModelMap model) {
         List<MerchantConfig> merchantConfigs = null;
         try {
             merchantConfigs = paymentCoreService.searchMerchantConfiguration(merchantId);
             Gson gson = new Gson();
             model.addAttribute("merchantDetails", gson.toJson(merchantConfigs));
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return "admin" ;
+        return "admin";
     }
 
     /**
-     *
      * @param merchantId
      * @param saleId
      * @param model
      * @return
      */
-    @RequestMapping(value = "/merchant/{merchantId}/refund/{saleId}",method = RequestMethod.GET)
-    public String refundTransaction(@PathVariable  int merchantId,@PathVariable String saleId, ModelMap model) {
+    @RequestMapping(value = "/merchant/{merchantId}/refund/{saleId}", method = RequestMethod.GET)
+    public String refundTransaction(@PathVariable int merchantId, @PathVariable String saleId, ModelMap model) {
         Gson gson = new Gson();
         TwoCheckoutService checkoutService = new TwoCheckoutService(configurationHelper);
         try {
@@ -68,18 +68,17 @@ public class PaymentPlatformController {
             String message = e.toString();
             e.printStackTrace();
         }
-        return "admin" ;
+        return "admin";
     }
 
     /**
-     *
      * @param merchantId
      * @param saleId
      * @param model
      * @return
      */
-    @RequestMapping(value = "/merchant/{merchantId}/paymentDetails/{saleId}",method = RequestMethod.GET)
-    public String findTransactionDetails(@PathVariable  int merchantId,@PathVariable String saleId, ModelMap model) {
+    @RequestMapping(value = "/merchant/{merchantId}/paymentDetails/{saleId}", method = RequestMethod.GET)
+    public String findTransactionDetails(@PathVariable int merchantId, @PathVariable String saleId, ModelMap model) {
         Gson gson = new Gson();
         TwoCheckoutService checkoutService = new TwoCheckoutService(configurationHelper);
         try {
@@ -89,10 +88,8 @@ public class PaymentPlatformController {
             String message = e.toString();
             e.printStackTrace();
         }
-        return "admin" ;
+        return "admin";
     }
-
-
 
 
 }

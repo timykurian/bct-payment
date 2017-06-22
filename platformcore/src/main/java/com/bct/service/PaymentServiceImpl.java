@@ -18,78 +18,71 @@ import java.util.List;
 public class PaymentServiceImpl {
 
     Logger logger = LoggerFactory.getLogger(PaymentServiceImpl.class);
-
+    private PaymentPlatformDAOImpl paymentPlatformDAO;
 
     public void setPaymentPlatformDAO(PaymentPlatformDAOImpl paymentPlatformDAO) {
         this.paymentPlatformDAO = paymentPlatformDAO;
     }
 
-    private PaymentPlatformDAOImpl paymentPlatformDAO ;
-
     /**
-     *
      * @param paymentTransaction
      * @throws PaymentPlatformDAOException
      */
-    public  void savePaymentTransaction(PaymentTransaction paymentTransaction ) throws PaymentPlatformDAOException {
+    public void savePaymentTransaction(PaymentTransaction paymentTransaction) throws PaymentPlatformDAOException {
         try {
-             paymentPlatformDAO.savePaymentTransaction(paymentTransaction);
-        }catch (Exception e) {
-                throw new PaymentPlatformDAOException(e.getMessage());
+            paymentPlatformDAO.savePaymentTransaction(paymentTransaction);
+        } catch (Exception e) {
+            throw new PaymentPlatformDAOException(e.getMessage());
         }
 
     }
 
 
     /**
-     *
      * @param paymentTransaction
      * @return
      */
-    public List<PaymentTransaction>  searchMerchantPaymentDetailedReport(PaymentTransaction paymentTransaction) {
+    public List<PaymentTransaction> searchMerchantPaymentDetailedReport(PaymentTransaction paymentTransaction) {
         List<PaymentTransaction> paymentTransactions = null;
         try {
             paymentTransactions = paymentPlatformDAO.searchPaymentTransactionDetail(paymentTransaction);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return paymentTransactions;
     }
 
     /**
-     *
      * @param id
      * @return
      */
-    public List<PaymentTransaction>  searchMerchantPaymentSummaryReport(int id) {
+    public List<PaymentTransaction> searchMerchantPaymentSummaryReport(int id) {
         List<PaymentTransaction> paymentTransactions = null;
         try {
-            PaymentTransaction paymentTransaction =new PaymentTransaction();
+            PaymentTransaction paymentTransaction = new PaymentTransaction();
             paymentTransaction.setMerchantId(id);
             paymentTransactions = paymentPlatformDAO.searchPaymentTransactionSummery(paymentTransaction);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return paymentTransactions;
     }
 
     /**
-     *
      * @param merchantId
      * @return
      */
     public List<MerchantConfig> searchMerchantConfiguration(int merchantId) {
         List<MerchantConfig> merchantConfigs = null;
-        try{
+        try {
             merchantConfigs = paymentPlatformDAO.searchMerchantConfiguration(merchantId);
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return merchantConfigs;
     }
 
     /**
-     *
      * @param id
      * @return
      */
@@ -97,7 +90,7 @@ public class PaymentServiceImpl {
         DashboardContent content = new DashboardContent();
         try {
             content = paymentPlatformDAO.getDashboardContent(id);
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return content;
@@ -109,7 +102,7 @@ public class PaymentServiceImpl {
 
         try {
             updated = paymentPlatformDAO.updateRefund(saleId);
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -117,7 +110,6 @@ public class PaymentServiceImpl {
     }
 
     /**
-     *
      * @param merchantId
      * @return
      */
@@ -125,7 +117,7 @@ public class PaymentServiceImpl {
         DashboardContent content = new DashboardContent();
         try {
             content = paymentPlatformDAO.getDashboardContent(merchantId);
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return content;

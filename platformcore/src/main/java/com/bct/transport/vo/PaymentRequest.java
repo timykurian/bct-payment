@@ -137,7 +137,7 @@ public class PaymentRequest {
         try {
             ObjectMapper mapper = new ObjectMapper();
             return mapper.writeValueAsString(this);
-        } catch(Exception e) {
+        } catch (Exception e) {
             return "";
         }
     }

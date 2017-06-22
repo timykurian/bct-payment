@@ -6,6 +6,10 @@ import java.math.BigDecimal;
  * Created by timy on 6/9/17.
  */
 public class Options {
+    private String optName;
+    private String optValue;
+    private BigDecimal optSurcharge;
+
     public String getOptName() {
         return optName;
     }
@@ -29,9 +33,5 @@ public class Options {
     public void setOptSurcharge(BigDecimal optSurcharge) {
         this.optSurcharge = optSurcharge;
     }
-
-    private String optName;
-    private String optValue;
-    private BigDecimal optSurcharge;
 
 }

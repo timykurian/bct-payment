@@ -1,11 +1,11 @@
 package com.bct.core.servlet;
 
-import com.bct.core.exception.PaymentPlatformDAOException;
-import com.bct.utils.NumberUtil;
 import com.bct.core.exception.NotSupportedException;
+import com.bct.core.exception.PaymentPlatformDAOException;
 import com.bct.model.PaymentTransaction;
 import com.bct.partner.twocheckout.TwoCheckoutService;
 import com.bct.service.PaymentServiceImpl;
+import com.bct.utils.NumberUtil;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -26,7 +26,7 @@ public class CheckoutServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        
+
         super.init();
         applicationContext = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
         paymentCoreService = applicationContext.getBean(PaymentServiceImpl.class);
@@ -55,7 +55,7 @@ public class CheckoutServlet extends HttpServlet {
             paymentTransaction.setCcNo(request.getParameter("cvv"));
             paymentTransaction.setMerchantId(NumberUtil.returnZeroIntIfNull(request.getParameter("merchant")));
 
-            try{
+            try {
                 if (request.getParameter("type").equalsIgnoreCase("recurring")) {
                     paymentTransaction.setIsRecurring(1);
                     paymentTransaction = checkoutService.recurringBilling(paymentTransaction);
@@ -63,8 +63,8 @@ public class CheckoutServlet extends HttpServlet {
                     paymentTransaction.setIsRecurring(0);
                     paymentTransaction = checkoutService.authorize(paymentTransaction);
                 }
-            }catch (Exception e) {
-                paymentTransaction.setResponseMsg(e.getMessage().substring(0,100));
+            } catch (Exception e) {
+                paymentTransaction.setResponseMsg(e.getMessage().substring(0, 100));
                 request.setAttribute("status", "failure");
                 request.getRequestDispatcher("bookStore.jsp")
                         .forward(request, response);

@@ -13,7 +13,7 @@
 </head>
 <body>
 <form name="newsStand1" id="newsStandForm1">
-    <input type="hidden" name="q1" id="searchText1" />
+    <input type="hidden" name="q1" id="searchText1"/>
 </form>
 <div class="navbar navbar-fixed-top" role="navigation" style="background-color: rgb(233, 233, 218);">
     <div class="container-fluid">

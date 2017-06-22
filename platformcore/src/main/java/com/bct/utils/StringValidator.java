@@ -5,15 +5,14 @@ package com.bct.utils;
  */
 public class StringValidator {
     /**
-     *
      * @param str
      * @return
      */
     public static boolean isNotNullOrEmpty(String str) {
-        if(str != null && str.trim().equalsIgnoreCase("")){
-            return true ;
-        }else {
-            return false ;
+        if (str != null && str.trim().equalsIgnoreCase("")) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

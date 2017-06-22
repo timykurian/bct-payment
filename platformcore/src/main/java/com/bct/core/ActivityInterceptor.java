@@ -17,43 +17,43 @@ import java.util.TimeZone;
  */
 public class ActivityInterceptor implements MethodInterceptor {
 
-        Logger logger = LoggerFactory.getLogger(ActivityInterceptor.class);
+    Logger logger = LoggerFactory.getLogger(ActivityInterceptor.class);
 
-        public Object invoke(MethodInvocation invocation) throws Throwable {
-            System.out.println("Before: invocation=[" + invocation + "]");
+    public Object invoke(MethodInvocation invocation) throws Throwable {
+        System.out.println("Before: invocation=[" + invocation + "]");
 
-            DateFormat dateFormat;
-            dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            dateFormat.setTimeZone(TimeZone.getTimeZone("UTC")); //get utc time
+        DateFormat dateFormat;
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC")); //get utc time
 
-            Calendar cal = Calendar.getInstance();
-            StopWatch sw = new StopWatch();
-            String responseCode = "SUC";
-            //start clock
-            sw.start();
+        Calendar cal = Calendar.getInstance();
+        StopWatch sw = new StopWatch();
+        String responseCode = "SUC";
+        //start clock
+        sw.start();
 
-            Object rval = null;
-            try {
-                rval = invocation.proceed();
-                sw.stop();
-            } catch (Exception e) {
-                sw.stop();
-                responseCode = "ERR";
-                throw e;
-            } finally {
-                String dateString = dateFormat.format(cal.getTime());
-                String type  = invocation.getMethod().getName();
-                String request = "null";
-                String elapsedTime = Long.toString(sw.getTotalTimeMillis());
-                logger.info(dateString + "|" +
-                        type + "|" +
-                        elapsedTime + "|"+
-                        Arrays.toString(invocation.getArguments() ));
+        Object rval = null;
+        try {
+            rval = invocation.proceed();
+            sw.stop();
+        } catch (Exception e) {
+            sw.stop();
+            responseCode = "ERR";
+            throw e;
+        } finally {
+            String dateString = dateFormat.format(cal.getTime());
+            String type = invocation.getMethod().getName();
+            String request = "null";
+            String elapsedTime = Long.toString(sw.getTotalTimeMillis());
+            logger.info(dateString + "|" +
+                    type + "|" +
+                    elapsedTime + "|" +
+                    Arrays.toString(invocation.getArguments()));
 
-                System.out.println("Invocation returned");
+            System.out.println("Invocation returned");
 
-            }
-            return rval;
         }
+        return rval;
+    }
 
 }

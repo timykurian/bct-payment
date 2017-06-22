@@ -5,16 +5,12 @@ package com.bct.model;
  */
 public class MerchantConfig {
 
-    private int id ;
-    private String configKey ;
+    private int id;
+    private String configKey;
     private String configValue;
-    private int merchantId ;
+    private int merchantId;
 
     public MerchantConfig() {
-    }
-
-    public int getId() {
-        return id;
     }
 
     public MerchantConfig(int id, String configKey, String configValue, int merchantId) {
@@ -22,6 +18,10 @@ public class MerchantConfig {
         this.configKey = configKey;
         this.configValue = configValue;
         this.merchantId = merchantId;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {

@@ -22,7 +22,8 @@
 
     <link rel="stylesheet" type='text/css'
           href="<%=request.getContextPath()%>/static/bootstrap-3.1.1/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/static/jqwidgets-3.2.1/styles/jqx.base.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="<%=request.getContextPath()%>/static/jqwidgets-3.2.1/styles/jqx.base.css"/>
     <link rel="stylesheet" type="text/css"
           href="<%=request.getContextPath()%>/static/jqwidgets-3.2.1/styles/jqx.bootstrap.css"/>
     <link rel='stylesheet' type='text/css' href='<%=request.getContextPath()%>/static/css/JQWidgetsHeader.css'/>
@@ -35,12 +36,12 @@
             padding-bottom: 50px;
         }
     </style>
-    <tiles:insertAttribute name="pageHeader" />
+    <tiles:insertAttribute name="pageHeader"/>
 </head>
 <body>
 <div class="page">
-    <tiles:insertAttribute name="body" />
-    <tiles:insertAttribute name="footer" />
+    <tiles:insertAttribute name="body"/>
+    <tiles:insertAttribute name="footer"/>
 </div>
 </body>
 </html>

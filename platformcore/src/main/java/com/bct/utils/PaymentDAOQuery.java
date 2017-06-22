@@ -7,7 +7,7 @@ public class PaymentDAOQuery {
 
     public static String searchPaymentTransactionQry_summary = "select MERCHANT_ID,TRANSACTION_DATE,sum(AUTH_AMOUNT) as AUTH_AMOUNT " +
             " from PAYMENT_TRANSACTIONS where  merchant_id =?";
-    public static String searchPaymentTransactionQry_summary_grpBy = " group by MERCHANT_ID,TRANSACTION_DATE" ;
+    public static String searchPaymentTransactionQry_summary_grpBy = " group by MERCHANT_ID,TRANSACTION_DATE";
     public static String searchPaymentTransactionQry_detail = "select " +
             "AUTH_AMOUNT," + //1
             "TOKEN," + //2
@@ -20,11 +20,11 @@ public class PaymentDAOQuery {
             "CUSTOMER_NAME," +//9
             "ADDRESS1," +//10
             "ADDRESS2," +//11
-            "CITY,"+//12
+            "CITY," +//12
             "STATE," +//13
             "ZIP_CODE," +//14
             "TRANSACTIONID," +//15
-            "MERCHANT_ID,ORDER_ID"+//16
+            "MERCHANT_ID,ORDER_ID" +//16
             " from PAYMENT_TRANSACTIONS where  merchant_id =? ";
     public static String savePaymentTransactionQry = "INSERT INTO PAYMENT_TRANSACTIONS " +
             "(" +
@@ -39,12 +39,12 @@ public class PaymentDAOQuery {
             "CUSTOMER_NAME," +//9
             "ADDRESS1," +//10
             "ADDRESS2," +//11
-            "CITY,"+//12
+            "CITY," +//12
             "STATE," +//13
             "ZIP_CODE," +//14
             "TRANSACTIONID," +//15
             "MERCHANT_ID," + //16
-            "ORDER_ID, "+//17
+            "ORDER_ID, " +//17
             "IS_RECURRING, " +//18
             "TRANSACTION_DATE " +//19
             ") VALUES (?,?,?,1,'CC',?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
@@ -63,7 +63,7 @@ public class PaymentDAOQuery {
             " Set Is_Refunded = 1 Where Order_Id = ?";
 
 
-    public static String searchMerchantConfig = "select id , CONFIG_KEY,CONFIG_VALUE,MERCHANT_ID from merchant_config wheRE merchant_id = ?" ;
+    public static String searchMerchantConfig = "select id , CONFIG_KEY,CONFIG_VALUE,MERCHANT_ID from merchant_config wheRE merchant_id = ?";
 
 
     public static String totalOrders = "select count(*) totalOrders from payment_transactions where MERCHANT_ID = ?";

@@ -9,12 +9,12 @@ import java.util.HashMap;
  */
 public class PaymentTransaction {
 
-    private String transactionId ;
-    private int merchantId ;
-    private int serviceProviderId ;
-    private BigDecimal authAmout ;
-    private String cardType ;
-    private  String token;
+    private String transactionId;
+    private int merchantId;
+    private int serviceProviderId;
+    private BigDecimal authAmout;
+    private String cardType;
+    private String token;
     private String ccexp;
     private String customerName;
     private String address1;
@@ -39,6 +39,55 @@ public class PaymentTransaction {
     private String billingEndDate;
     private String productId;
     private String productDesc;
+    private Date transactionDate;
+    private int paymentId;
+
+    public PaymentTransaction(String transactionId, int merchantId, int serviceProviderId, BigDecimal authAmout, String cardType, String token, String ccexp, String customerName, String address1, String address2, String city, String state, String postalCode, String currencyCode, String countryCode, String phoneno, String paymentMethod, String ccNo, String expC, String cvv, String responseCode, String responseMsg, int paymentId) {
+        this.transactionId = transactionId;
+        this.merchantId = merchantId;
+        this.serviceProviderId = serviceProviderId;
+        this.authAmout = authAmout;
+        this.cardType = cardType;
+        this.token = token;
+        this.ccexp = ccexp;
+        this.customerName = customerName;
+        this.address1 = address1;
+        this.address2 = address2;
+        this.city = city;
+        this.state = state;
+        this.postalCode = postalCode;
+        this.currencyCode = currencyCode;
+        this.countryCode = countryCode;
+        this.phoneno = phoneno;
+        this.paymentMethod = paymentMethod;
+        this.ccNo = ccNo;
+        this.expC = expC;
+        this.cvv = cvv;
+        this.responseCode = responseCode;
+        this.responseMsg = responseMsg;
+        this.paymentId = paymentId;
+    }
+
+    public PaymentTransaction(int merchantId, int serviceProviderId, BigDecimal authAmout) {
+        this.merchantId = merchantId;
+        this.serviceProviderId = serviceProviderId;
+        this.authAmout = authAmout;
+
+    }
+
+    public PaymentTransaction(int merchantId, Date transactionDate, BigDecimal authAmout) {
+        this.merchantId = merchantId;
+        this.transactionDate = transactionDate;
+        this.authAmout = authAmout;
+
+    }
+
+    public PaymentTransaction(int paymentId) {
+        this.paymentId = paymentId;
+    }
+
+    public PaymentTransaction() {
+    }
 
     public HashMap getBillingAddress() {
 
@@ -103,7 +152,6 @@ public class PaymentTransaction {
         this.isRecurring = isRecurring;
     }
 
-
     public String getOrderNumber() {
         return orderNumber;
     }
@@ -120,56 +168,9 @@ public class PaymentTransaction {
         this.transactionDate = transactionDate;
     }
 
-    private Date transactionDate;
-
-
-    private int paymentId;
-
-    public PaymentTransaction(String transactionId, int merchantId, int serviceProviderId, BigDecimal authAmout, String cardType, String token, String ccexp, String customerName, String address1, String address2, String city, String state, String postalCode, String currencyCode, String countryCode, String phoneno, String paymentMethod, String ccNo, String expC, String cvv, String responseCode, String responseMsg, int paymentId) {
-        this.transactionId = transactionId;
-        this.merchantId = merchantId;
-        this.serviceProviderId = serviceProviderId;
-        this.authAmout = authAmout;
-        this.cardType = cardType;
-        this.token = token;
-        this.ccexp = ccexp;
-        this.customerName = customerName;
-        this.address1 = address1;
-        this.address2 = address2;
-        this.city = city;
-        this.state = state;
-        this.postalCode = postalCode;
-        this.currencyCode = currencyCode;
-        this.countryCode = countryCode;
-        this.phoneno = phoneno;
-        this.paymentMethod = paymentMethod;
-        this.ccNo = ccNo;
-        this.expC = expC;
-        this.cvv = cvv;
-        this.responseCode = responseCode;
-        this.responseMsg = responseMsg;
-        this.paymentId = paymentId;
-    }
-
-
-
-    public PaymentTransaction(int merchantId, int serviceProviderId, BigDecimal authAmout) {
-        this.merchantId = merchantId;
-        this.serviceProviderId = serviceProviderId;
-        this.authAmout = authAmout;
-
-    }
-
-    public  PaymentTransaction(int merchantId,Date transactionDate,BigDecimal authAmout) {
-        this.merchantId = merchantId;
-        this.transactionDate = transactionDate;
-        this.authAmout = authAmout;
-
-    }
     public String getTransactionId() {
         return transactionId;
     }
-
 
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
@@ -183,7 +184,6 @@ public class PaymentTransaction {
         this.paymentId = paymentId;
     }
 
-
     public String getResponseMsg() {
         return responseMsg;
     }
@@ -192,8 +192,6 @@ public class PaymentTransaction {
         this.responseMsg = responseMsg;
     }
 
-
-
     public String getResponseCode() {
         return responseCode;
     }
@@ -201,8 +199,6 @@ public class PaymentTransaction {
     public void setResponseCode(String responseCode) {
         this.responseCode = responseCode;
     }
-
-
 
     public String getCustomerName() {
         return customerName;
@@ -308,16 +304,6 @@ public class PaymentTransaction {
         this.cvv = cvv;
     }
 
-
-
-    public PaymentTransaction(int paymentId) {
-        this.paymentId = paymentId;
-    }
-
-    public PaymentTransaction() {
-    }
-
-
     public int getMerchantId() {
         return merchantId;
     }
@@ -368,12 +354,12 @@ public class PaymentTransaction {
 
     @Override
     public String toString() {
-        return "PaymentTransaction("+
-                 (transactionId != null ? "transactionId=" + transactionId + ", " : "") +
-                (merchantId != 0 ? "merchantId=" + merchantId + ", " : "")+
-                (serviceProviderId != 0 ? "serviceProviderId=" + serviceProviderId + ", " : "")+
-                (authAmout != null ? "authAmout=" + authAmout + ", " : "")+
-                (cardType != null ? "cardType=" + cardType + ", " : "")+
+        return "PaymentTransaction(" +
+                (transactionId != null ? "transactionId=" + transactionId + ", " : "") +
+                (merchantId != 0 ? "merchantId=" + merchantId + ", " : "") +
+                (serviceProviderId != 0 ? "serviceProviderId=" + serviceProviderId + ", " : "") +
+                (authAmout != null ? "authAmout=" + authAmout + ", " : "") +
+                (cardType != null ? "cardType=" + cardType + ", " : "") +
                 (token != null ? "token=" + token + ", " : ")")
                 ;
     }

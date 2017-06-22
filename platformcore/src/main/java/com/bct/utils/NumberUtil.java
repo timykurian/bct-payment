@@ -7,42 +7,39 @@ import java.math.BigDecimal;
  */
 public class NumberUtil {
     /**
-     *
      * @param number
      * @return
      */
     public static Integer returnZeroIfNull(Integer number) {
-        if(number != null ){
-            return number ;
-        }else {
-            return 0 ;
+        if (number != null) {
+            return number;
+        } else {
+            return 0;
         }
     }
 
     /**
-     *
      * @param numberStr
      * @return
      */
     public static BigDecimal returnZeroIfNull(String numberStr) {
         BigDecimal bigDecimal = new BigDecimal(0);
-        if(numberStr != null ){
-             return new BigDecimal(numberStr);
-        }else {
-            return bigDecimal ;
+        if (numberStr != null) {
+            return new BigDecimal(numberStr);
+        } else {
+            return bigDecimal;
         }
     }
 
     /**
-     *
      * @param numberStr
      * @return
      */
     public static int returnZeroIntIfNull(String numberStr) {
-        if(numberStr != null ){
+        if (numberStr != null) {
             return Integer.parseInt(numberStr);
-        }else {
-            return 0 ;
+        } else {
+            return 0;
         }
     }
 }

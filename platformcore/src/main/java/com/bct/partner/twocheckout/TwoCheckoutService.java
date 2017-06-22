@@ -1,9 +1,9 @@
 package com.bct.partner.twocheckout;
 
-import com.bct.utils.PaymentConfigurationHelper;
 import com.bct.core.exception.TwoCheckOutException;
 import com.bct.model.Lineitems;
 import com.bct.model.PaymentTransaction;
+import com.bct.utils.PaymentConfigurationHelper;
 import com.google.gson.Gson;
 import com.twocheckout.*;
 import com.twocheckout.model.Authorization;
@@ -49,8 +49,8 @@ public class TwoCheckoutService {
             request.put("billingAddr", paymentTransaction.getBillingAddress());
 
             Authorization response = TwocheckoutCharge.authorize(request);
-            message =  response.getResponseMsg() + "TransactionId is:" + response.getTransactionId();
-            System.out.println(response.getOrderNumber()+"-" + "-Msg-" + message);
+            message = response.getResponseMsg() + "TransactionId is:" + response.getTransactionId();
+            System.out.println(response.getOrderNumber() + "-" + "-Msg-" + message);
             paymentTransaction.setResponseCode(response.getResponseCode());
             paymentTransaction.setResponseMsg(response.getResponseMsg());
             paymentTransaction.setTransactionId(response.getTransactionId());
@@ -59,12 +59,12 @@ public class TwoCheckoutService {
             message = e.toString();
             System.out.println("Error-" + message);
             e.printStackTrace();
-            throw  new TwoCheckOutException(message);
+            throw new TwoCheckOutException(message);
         }
-        return paymentTransaction ;
+        return paymentTransaction;
     }
 
-    public PaymentTransaction recurringBilling(PaymentTransaction paymentTransaction )  throws TwoCheckOutException {
+    public PaymentTransaction recurringBilling(PaymentTransaction paymentTransaction) throws TwoCheckOutException {
 
         String message = null;
         Twocheckout.privatekey = configHelper.getStringValue("PARTNER", "PRIVATE_KEY");
@@ -107,7 +107,7 @@ public class TwoCheckoutService {
 
             Authorization response = TwocheckoutCharge.authorize(request);
             message = response.getResponseMsg() + "TransactionId is:" + response.getOrderNumber();
-            System.out.println(response.getOrderNumber()+"-" + "-Msg-" + message);
+            System.out.println(response.getOrderNumber() + "-" + "-Msg-" + message);
             paymentTransaction.setResponseCode(response.getResponseCode());
             paymentTransaction.setResponseMsg(response.getResponseMsg());
             paymentTransaction.setTransactionId(response.getTransactionId());
@@ -116,13 +116,13 @@ public class TwoCheckoutService {
             message = e.toString();
             System.out.println("Error-" + message);
             e.printStackTrace();
-            throw  new TwoCheckOutException(message);
+            throw new TwoCheckOutException(message);
         }
-        return paymentTransaction ;
+        return paymentTransaction;
     }
 
-    public TwocheckoutResponse refundTransaction( String saleId ) throws TwocheckoutException {
-        
+    public TwocheckoutResponse refundTransaction(String saleId) throws TwocheckoutException {
+
         TwocheckoutResponse twocheckoutResponse = null;
         HashMap params_refund = new HashMap();
         params_refund.put("comment", "test");
@@ -142,7 +142,7 @@ public class TwoCheckoutService {
     }
 
     public Sale findTransactionDetails(String saleId) throws TwocheckoutException {
-        
+
         Sale sale = null;
         try {
             Gson gson = new Gson();

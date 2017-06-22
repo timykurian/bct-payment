@@ -16,7 +16,8 @@
 </div>
 <div class="span5">
     <h3> Thank you for your payment! Output from Execute Payment Request </h3>
-    <p>Message:  <%=request.getAttribute("response")%></p>
+    <p>Message:  <%=request.getAttribute("response")%>
+    </p>
 
     <table>
         <tbody>

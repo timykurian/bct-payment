@@ -1,39 +1,30 @@
 package com.bct.dao;
 
-import com.bct.core.exception.PaymentPlatformDAOException;
-import com.bct.utils.PaymentDAOQuery;
 import com.bct.core.exception.BaseException;
+import com.bct.core.exception.PaymentPlatformDAOException;
 import com.bct.model.DashboardContent;
 import com.bct.model.MerchantConfig;
 import com.bct.model.PaymentTransaction;
+import com.bct.utils.PaymentDAOQuery;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by timy on 5/25/17.
  */
-public class PaymentPlatformDAOImpl   {
+public class PaymentPlatformDAOImpl {
 
     private DriverManagerDataSource dataSource;
     private JdbcTemplate jdbcTemplate;
-
 
     public void setDataSource(DriverManagerDataSource dataSource) {
         this.dataSource = dataSource;
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public DriverManagerDataSource getDataSource() {
-        return dataSource;
-    }
-
-    /**
-     *
-     * @param paymentTransaction
-     * @throws PaymentPlatformDAOException
-     */
     public void savePaymentTransaction(PaymentTransaction paymentTransaction) throws PaymentPlatformDAOException {
         try {
             jdbcTemplate.update(PaymentDAOQuery.savePaymentTransactionQry,
@@ -55,17 +46,11 @@ public class PaymentPlatformDAOImpl   {
         }
     }
 
-    /**
-     *
-     * @param paymentTransaction
-     * @return
-     * @throws PaymentPlatformDAOException
-     */
     public List<PaymentTransaction> searchPaymentTransactionDetail(PaymentTransaction paymentTransaction) throws PaymentPlatformDAOException {
         List<PaymentTransaction> paymentTransactions = null;
         try {
             StringBuilder query = new StringBuilder(PaymentDAOQuery.searchPaymentTransactionQry_detail);
-            if(paymentTransaction.getIsRecurring() != null && paymentTransaction.getIsRecurring()>0){
+            if (paymentTransaction.getIsRecurring() != null && paymentTransaction.getIsRecurring() > 0) {
                 query.append(" and IS_RECURRING = 1");
             }
             paymentTransactions = jdbcTemplate.query(query.toString(),
@@ -77,42 +62,30 @@ public class PaymentPlatformDAOImpl   {
         return paymentTransactions;
     }
 
-    /**
-     *
-     * @param paymentTransaction
-     * @return
-     * @throws PaymentPlatformDAOException
-     */
     public List<PaymentTransaction> searchPaymentTransactionSummery(PaymentTransaction paymentTransaction) throws PaymentPlatformDAOException {
         List<PaymentTransaction> paymentTransactions = null;
-         try {
-             StringBuilder query = new StringBuilder(PaymentDAOQuery.searchPaymentTransactionQry_summary );
-             query.append(PaymentDAOQuery.searchPaymentTransactionQry_summary_grpBy) ;
-             paymentTransactions = jdbcTemplate.query(query.toString(),new Object[]{paymentTransaction.getMerchantId()},
-                     new SpringJdbcMapper.PaymentTransactionSummaryReportRowMapper  ());
+        try {
+            StringBuilder query = new StringBuilder(PaymentDAOQuery.searchPaymentTransactionQry_summary);
+            query.append(PaymentDAOQuery.searchPaymentTransactionQry_summary_grpBy);
+            paymentTransactions = jdbcTemplate.query(query.toString(), new Object[]{paymentTransaction.getMerchantId()},
+                    new SpringJdbcMapper.PaymentTransactionSummaryReportRowMapper());
 
-        }catch (Exception exception) {
+        } catch (Exception exception) {
             throw new RuntimeException(exception);
         }
         return paymentTransactions;
     }
 
-    /**
-     *
-     * @param merchantId
-     * @return
-     * @throws PaymentPlatformDAOException
-     */
     public List<MerchantConfig> searchMerchantConfiguration(int merchantId) throws PaymentPlatformDAOException {
-        List<MerchantConfig> merchantConfigs = null ;
-         try {
-            if(merchantId >0 ) {
+        List<MerchantConfig> merchantConfigs = null;
+        try {
+            if (merchantId > 0) {
                 merchantConfigs = jdbcTemplate.query(PaymentDAOQuery.searchMerchantConfig, new Object[]{merchantId},
                         new SpringJdbcMapper.MerchantConfigRowMapper());
-            }else{
-                throw  new PaymentPlatformDAOException(BaseException.MERCHANT_ID_MISSING);
+            } else {
+                throw new PaymentPlatformDAOException(BaseException.MERCHANT_ID_MISSING);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new PaymentPlatformDAOException(e.getMessage());
         }
         return merchantConfigs;
@@ -130,7 +103,7 @@ public class PaymentPlatformDAOImpl   {
             for (Map row : rows) {
                 content.setTotalSubscriptions((Integer.parseInt(row.get("totalSubscriptions").toString())));
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new PaymentPlatformDAOException(e);
         }
@@ -150,8 +123,4 @@ public class PaymentPlatformDAOImpl   {
 
         return (rowsAffected > 0) ? true : false;
     }
-
-
-
-
-    }
+}

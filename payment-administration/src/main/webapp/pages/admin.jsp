@@ -9,6 +9,6 @@
 <html>
 <body>
 <h1>Merchant Details :</h1>
-<h3>  ${merchantDetails}</h3>
+<h3> ${merchantDetails}</h3>
 </body>
 </html>
