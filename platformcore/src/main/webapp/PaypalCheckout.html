@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<!DOCTYPE html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+</head>
+
+<body>
+<div id="paypal-button"></div>
+<script>
+    paypal.Button.render({
+
+
+
+        env: 'sandbox', // Or 'sandbox',
+        client: {
+            sandbox:    'bctintegration',
+            production: 'EOJ2S-Z6OoN_le_KS1d75wsZ6y0SFdVsY9183IvxFyZp:EClusMEUk8e9ihI7ZdVLF5cZ6y0SFdVsY9183IvxFyZQ'
+        },
+
+        commit: true, // Show a 'Pay Now' button
+
+        payment: function() {
+            prompt("Paypal payment:", " Checking");
+            // Set up the payment here
+
+
+            return actions.payment.create({
+                transactions: [
+                    {
+                        amount: { total: '0.01', currency: 'USD' }
+                    }
+                ]
+            });
+        },
+
+        onAuthorize: function(data, actions) {
+            prompt("Paypal onAuthorize:", " Checking");
+            // Execute the payment here
+            return actions.payment.execute().then(function() {
+                window.alert('Payment Complete!');
+            });
+        }
+
+    }, '#paypal-button');
+</script>
+</body>
+
+
+</html>

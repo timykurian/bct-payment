@@ -1,0 +1,13 @@
+
+.textWithImage {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right;
+}
+
+.label {
+    font-size: 125%;
+    color: black;
+    font-weight: bold;
+    position: absolute;
+}
