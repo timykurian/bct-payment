@@ -5,6 +5,7 @@ package com.bct.utils;
  */
 public class StringValidator {
     /**
+     *
      * @param str
      * @return
      */

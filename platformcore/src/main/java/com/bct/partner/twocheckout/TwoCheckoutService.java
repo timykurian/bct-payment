@@ -1,9 +1,9 @@
 package com.bct.partner.twocheckout;
 
+import com.bct.utils.PaymentConfigurationHelper;
 import com.bct.core.exception.TwoCheckOutException;
 import com.bct.model.Lineitems;
 import com.bct.model.PaymentTransaction;
-import com.bct.utils.PaymentConfigurationHelper;
 import com.google.gson.Gson;
 import com.twocheckout.*;
 import com.twocheckout.model.Authorization;
@@ -122,7 +122,7 @@ public class TwoCheckoutService {
     }
 
     public TwocheckoutResponse refundTransaction(String saleId) throws TwocheckoutException {
-
+        
         TwocheckoutResponse twocheckoutResponse = null;
         HashMap params_refund = new HashMap();
         params_refund.put("comment", "test");

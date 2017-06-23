@@ -5,9 +5,8 @@ import com.bct.partner.twocheckout.TwoCheckoutService;
 import com.bct.service.PaymentServiceImpl;
 import com.bct.utils.PaymentConfigurationHelper;
 import com.google.gson.Gson;
-import com.twocheckout.TwocheckoutException;
-import com.twocheckout.TwocheckoutResponse;
-import com.twocheckout.model.Sale;
+import com.twocheckout.*;
+import com.twocheckout.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -52,6 +51,7 @@ public class PaymentPlatformController {
     }
 
     /**
+     *
      * @param merchantId
      * @param saleId
      * @param model
@@ -72,6 +72,7 @@ public class PaymentPlatformController {
     }
 
     /**
+     *
      * @param merchantId
      * @param saleId
      * @param model

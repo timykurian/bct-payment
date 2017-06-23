@@ -20,11 +20,11 @@ public class LandingServlet extends HttpServlet {
     }
 
     /**
-     * @param request  HttpServletRequest
+     * @param request HttpServletRequest
      * @param response HttpServletResponse
-     * @throws IOException      if an input or output error is detected when the
-     *                          servlet handles the GET request
-     * @throws ServletException if the request could not be handled
+     * @exception IOException if an input or output error is detected when the
+     *              servlet handles the GET request
+     * @exception ServletException if the request could not be handled
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

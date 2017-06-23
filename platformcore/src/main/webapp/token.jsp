@@ -56,7 +56,7 @@
 
     // Called when token created successfully.
     var successCallback = function (data) {
-
+        
         $("#tokenContainer").empty();
         $("#tokenContainer").append("<h3>" + data['response']['token']['token'] + "</h3>");
     };

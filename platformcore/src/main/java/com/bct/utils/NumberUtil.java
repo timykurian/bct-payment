@@ -7,6 +7,7 @@ import java.math.BigDecimal;
  */
 public class NumberUtil {
     /**
+     *
      * @param number
      * @return
      */
@@ -19,6 +20,7 @@ public class NumberUtil {
     }
 
     /**
+     *
      * @param numberStr
      * @return
      */
@@ -32,6 +34,7 @@ public class NumberUtil {
     }
 
     /**
+     *
      * @param numberStr
      * @return
      */

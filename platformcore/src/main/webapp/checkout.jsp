@@ -121,20 +121,6 @@
                     <div class="col-md-2">&nbsp;</div>
                     <div class="col-md-6">
                         <div class="col-lg-4">
-                            <label class="label" for="cardHolder">Name as on Card</label>
-                        </div>
-                        <div class="col-lg-6">
-                            <input class="form-control textWithImage" id="cardHolder" name="cardHolder" size="40">
-                        </div>
-                        <div class="col-lg-2">&nbsp;</div>
-                    </div>
-                    <div class="col-md-4">&nbsp;</div>
-                </div>
-                <div class="col-md-12">&nbsp;</div>
-                <div class="col-md-12">
-                    <div class="col-md-2">&nbsp;</div>
-                    <div class="col-md-6">
-                        <div class="col-lg-4">
                             <label class="label" for="expMonth">Expiry Date</label>
                         </div>
                         <div class="col-lg-3">
@@ -155,13 +141,34 @@
                             <label class="label" for="cvv">CVV (?)</label>
                         </div>
                         <div class="col-lg-6">
-                            <input class="form-control" id="cvv" type="password" name="cvv" size="20" value="123">
+                            <input class="form-control" id="cvv" name="cvv" size="40" value="123">
                         </div>
                         <div class="col-lg-2">&nbsp;</div>
                     </div>
                     <div class="col-md-4">&nbsp;</div>
                 </div>
                 <div class="col-md-12">&nbsp;</div>
+                <%--				<div class="col-md-12">
+                                    <div class="col-md-2">&nbsp;</div>
+                                    <div class="col-md-8">
+                                        <div class="col-lg-4">
+                                            <label class="label" for="amount">Payment Method</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="radio">
+                                                <label><input type="radio" id="payPalButton" name="paymentMethod">PayPal</label>
+                                            </div>
+                                            <div class="radio">
+                                                <label><input type="radio" id="2checkOutButton" name="paymentMethod">2 Checkout</label>
+                                            </div>
+                                            <div class="radio disabled">
+                                                <label><input type="radio" name="paymentMethod" disabled>Vantiv</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">&nbsp;</div>
+                                    </div>
+                                    <div class="col-md-2">&nbsp;</div>
+                                </div>--%>
                 <div class="col-md-12">
                     <div class="col-md-2">&nbsp;</div>
                     <div class="col-md-8">

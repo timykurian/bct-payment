@@ -1,16 +1,15 @@
 package com.bct.dao;
 
-import com.bct.core.exception.BaseException;
 import com.bct.core.exception.PaymentPlatformDAOException;
+import com.bct.utils.PaymentDAOQuery;
+import com.bct.core.exception.BaseException;
 import com.bct.model.DashboardContent;
 import com.bct.model.MerchantConfig;
 import com.bct.model.PaymentTransaction;
-import com.bct.utils.PaymentDAOQuery;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by timy on 5/25/17.
@@ -20,11 +19,19 @@ public class PaymentPlatformDAOImpl {
     private DriverManagerDataSource dataSource;
     private JdbcTemplate jdbcTemplate;
 
+    public DriverManagerDataSource getDataSource() {
+        return dataSource;
+    }
+
     public void setDataSource(DriverManagerDataSource dataSource) {
         this.dataSource = dataSource;
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+    /**
+     * @param paymentTransaction
+     * @throws PaymentPlatformDAOException
+     */
     public void savePaymentTransaction(PaymentTransaction paymentTransaction) throws PaymentPlatformDAOException {
         try {
             jdbcTemplate.update(PaymentDAOQuery.savePaymentTransactionQry,
@@ -46,6 +53,12 @@ public class PaymentPlatformDAOImpl {
         }
     }
 
+    /**
+     *
+     * @param paymentTransaction
+     * @return
+     * @throws PaymentPlatformDAOException
+     */
     public List<PaymentTransaction> searchPaymentTransactionDetail(PaymentTransaction paymentTransaction) throws PaymentPlatformDAOException {
         List<PaymentTransaction> paymentTransactions = null;
         try {
@@ -62,6 +75,12 @@ public class PaymentPlatformDAOImpl {
         return paymentTransactions;
     }
 
+    /**
+     *
+     * @param paymentTransaction
+     * @return
+     * @throws PaymentPlatformDAOException
+     */
     public List<PaymentTransaction> searchPaymentTransactionSummery(PaymentTransaction paymentTransaction) throws PaymentPlatformDAOException {
         List<PaymentTransaction> paymentTransactions = null;
         try {
@@ -76,6 +95,12 @@ public class PaymentPlatformDAOImpl {
         return paymentTransactions;
     }
 
+    /**
+     *
+     * @param merchantId
+     * @return
+     * @throws PaymentPlatformDAOException
+     */
     public List<MerchantConfig> searchMerchantConfiguration(int merchantId) throws PaymentPlatformDAOException {
         List<MerchantConfig> merchantConfigs = null;
         try {
@@ -123,4 +148,6 @@ public class PaymentPlatformDAOImpl {
 
         return (rowsAffected > 0) ? true : false;
     }
+
+
 }
