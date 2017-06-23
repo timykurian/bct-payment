@@ -9,6 +9,7 @@ var app = angular.module('bctPayAdmin', [
 var merchantPaymentList = [];
 var totalOrderCount = 0 ;
 var totalRecurringOrderCount = 0 ;
+var totalRefunds = 0;
 
 /**
  * Configure the Routes
@@ -122,6 +123,7 @@ app.controller('adminCtrl', ['$rootScope','$scope','$http','adminService', funct
             console.log(response);
             $rootScope.totalOrderCount = response.data.totalOrderCount;
             $rootScope.totalRecurringOrderCount = response.data.totalRecurringOrderCount;
+            $rootScope.totalRefunds = response.data.totalRefunds;
         }, function errorCallback(response) {
             console.log(response.statusText);
         });
@@ -141,6 +143,21 @@ app.controller('adminCtrl', ['$rootScope','$scope','$http','adminService', funct
             console.log(response.statusText);
         });
     };
+
+    $scope.searchRefunds = function () {
+        var reqUrl = 'admin/merchant/0/dashboard/refunds';
+        return $http({
+            method: 'GET',
+            url: reqUrl
+        }).then(function successCallback(response) {
+            console.log(response);
+            $rootScope.merchantPaymentList = JSON.parse(response.data.subscriptions);
+        }, function errorCallback(response) {
+            console.log(response.statusText);
+        });
+    };
+
+
 
 
 }]);

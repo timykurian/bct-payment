@@ -41,6 +41,7 @@ public class PaymentTransaction {
     private String productDesc;
     private Date transactionDate;
     private int paymentId;
+    private Integer isRefund;
 
     public PaymentTransaction(String transactionId, int merchantId, int serviceProviderId, BigDecimal authAmout, String cardType, String token, String ccexp, String customerName, String address1, String address2, String city, String state, String postalCode, String currencyCode, String countryCode, String phoneno, String paymentMethod, String ccNo, String expC, String cvv, String responseCode, String responseMsg, int paymentId) {
         this.transactionId = transactionId;
@@ -75,6 +76,7 @@ public class PaymentTransaction {
 
     }
 
+
     public PaymentTransaction(int merchantId, Date transactionDate, BigDecimal authAmout) {
         this.merchantId = merchantId;
         this.transactionDate = transactionDate;
@@ -87,6 +89,14 @@ public class PaymentTransaction {
     }
 
     public PaymentTransaction() {
+    }
+
+    public Integer getIsRefund() {
+        return isRefund;
+    }
+
+    public void setIsRefund(Integer isRefund) {
+        this.isRefund = isRefund;
     }
 
     public HashMap getBillingAddress() {

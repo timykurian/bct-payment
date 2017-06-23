@@ -69,7 +69,7 @@ public class PaymentDAOQuery {
     public static String totalOrders = "select count(*) totalOrders from payment_transactions where MERCHANT_ID = ?";
     public static String totalSubscriptions = "select count(*) totalSubscriptions from payment_transactions where MERCHANT_ID = ? and is_recurring = 1";
     public static String totalCancellations = "select count(*) from payment_transactions where MERCHANT_ID = ?";
-    public static String totalRefunds = "select count(*) from payment_transactions where MERCHANT_ID = ?";
+    public static String totalRefunds = "select count(*) as totalRefunds from payment_transactions where MERCHANT_ID = ? and Is_Refunded = 1";
     public static String totalAmount = "select sum(auth_amount) from payment_transactions where MERCHANT_ID = ?";
     public static String getSysConfigs = "select config_app, config_name, config_value from configurations";
     public static String getPaymentId = "Select PaymentId From Payment_Transactions Where Order_Id = ?";

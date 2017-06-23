@@ -11,6 +11,15 @@ public class DashboardContent {
     private Integer totalTransactions;
     private Integer cancellationsThisMonth;
     private BigDecimal transactionTotal;
+    private Integer totalRefunds;
+
+    public Integer getTotalRefunds() {
+        return totalRefunds;
+    }
+
+    public void setTotalRefunds(Integer totalRefunds) {
+        this.totalRefunds = totalRefunds;
+    }
 
     public Integer getTotalSubscriptions() {
         return totalSubscriptions;

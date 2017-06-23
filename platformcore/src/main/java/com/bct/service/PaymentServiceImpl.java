@@ -14,11 +14,15 @@ import java.util.List;
 /**
  * Created by timy on 5/26/17.
  */
-@Service
+
 public class PaymentServiceImpl {
 
     Logger logger = LoggerFactory.getLogger(PaymentServiceImpl.class);
     private PaymentPlatformDAOImpl paymentPlatformDAO;
+
+    public PaymentPlatformDAOImpl getPaymentPlatformDAO() {
+        return paymentPlatformDAO;
+    }
 
     public void setPaymentPlatformDAO(PaymentPlatformDAOImpl paymentPlatformDAO) {
         this.paymentPlatformDAO = paymentPlatformDAO;

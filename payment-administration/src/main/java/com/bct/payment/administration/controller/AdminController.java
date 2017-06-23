@@ -103,6 +103,11 @@ public class AdminController {
             TwocheckoutResponse twocheckoutResponse = checkoutService.refundTransaction(saleId);
             model.addAttribute("merchantDetails", gson.toJson(twocheckoutResponse));
             model.addAttribute("errorMsg", "");
+            try {
+                boolean statusUpdated = paymentCoreService.updateRefund(saleId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return new ResponseEntity(model, org.springframework.http.HttpStatus.OK);
         } catch (TwocheckoutException e) {
             e.printStackTrace();
@@ -113,6 +118,7 @@ public class AdminController {
             }
             return new ResponseEntity(model, org.springframework.http.HttpStatus.OK);
         }
+
     }
 
     /**
@@ -145,7 +151,7 @@ public class AdminController {
             DashboardContent content = paymentCoreService.getDashboardContent(merchantId);
             model.addAttribute("totalOrderCount", gson.toJson(content.getTotalTransactions()));
             model.addAttribute("totalRecurringOrderCount", gson.toJson(content.getTotalSubscriptions()));
-
+            model.addAttribute("totalRefunds", gson.toJson(content.getTotalRefunds()));
             return new ResponseEntity(model, org.springframework.http.HttpStatus.OK);
         } catch (Exception e) {
             String message = e.toString();
@@ -174,6 +180,24 @@ public class AdminController {
         }
 	}
 
+    @RequestMapping(value = "/merchant/{merchantId}/dashboard/refunds", method = RequestMethod.GET)
+    public HttpEntity<ResponseEntity> searchRefunds(@PathVariable int merchantId, ModelMap model) {
+
+        Gson gson = new Gson();
+        try {
+            PaymentTransaction paymentTransaction = new PaymentTransaction();
+            paymentTransaction.setMerchantId(merchantId);
+            paymentTransaction.setIsRefund(1);
+            List<PaymentTransaction> list = paymentCoreService.searchMerchantPaymentDetailedReport(paymentTransaction);
+            model.addAttribute("subscriptions", gson.toJson(list));
+            return new ResponseEntity(model, org.springframework.http.HttpStatus.OK);
+        } catch (Exception e) {
+            String message = e.toString();
+            e.printStackTrace();
+            model.addAttribute("errorMsg", e.getMessage());
+            return new ResponseEntity(model, org.springframework.http.HttpStatus.OK);
+        }
+    }
 
 
 

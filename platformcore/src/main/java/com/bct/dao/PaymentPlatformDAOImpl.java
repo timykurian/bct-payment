@@ -8,12 +8,14 @@ import com.bct.model.MerchantConfig;
 import com.bct.model.PaymentTransaction;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
 /**
  * Created by timy on 5/25/17.
  */
+@Component
 public class PaymentPlatformDAOImpl {
 
     private DriverManagerDataSource dataSource;
@@ -65,6 +67,9 @@ public class PaymentPlatformDAOImpl {
             StringBuilder query = new StringBuilder(PaymentDAOQuery.searchPaymentTransactionQry_detail);
             if (paymentTransaction.getIsRecurring() != null && paymentTransaction.getIsRecurring() > 0) {
                 query.append(" and IS_RECURRING = 1");
+            }
+            if (paymentTransaction.getIsRefund() != null && paymentTransaction.getIsRefund() > 0) {
+                query.append(" and Is_Refunded = 1");
             }
             paymentTransactions = jdbcTemplate.query(query.toString(),
                     new Object[]{paymentTransaction.getMerchantId()},
@@ -127,6 +132,10 @@ public class PaymentPlatformDAOImpl {
             rows = jdbcTemplate.queryForList(PaymentDAOQuery.totalSubscriptions, new Object[]{merchantId});
             for (Map row : rows) {
                 content.setTotalSubscriptions((Integer.parseInt(row.get("totalSubscriptions").toString())));
+            }
+            rows = jdbcTemplate.queryForList(PaymentDAOQuery.totalRefunds, new Object[]{merchantId});
+            for (Map row : rows) {
+                content.setTotalRefunds((Integer.parseInt(row.get("totalRefunds").toString())));
             }
         } catch (Exception e) {
             e.printStackTrace();
