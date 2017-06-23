@@ -4,17 +4,15 @@
         <div class="col-lg-12">
             <h1 class="page-header">Stop Recurring</h1>
         </div>
-        <!-- /.col-lg-12 -->
-        <form role="form">
-            <div class="form-group input-group">
-                <label class="control-label">Order Number</label>
-                <input type="text" class="form-control" ng-model="orderNo" width="100px">
-                <span class="input-group-btn" width="100px">
-                <button class="btn btn-default" type="button" ng-click="stopRecurring()"><i class="fa fa-search"></i>
-                </button>
-             </span>
-            </div>
-        </form>
+
+        <div class="col-lg-6">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Order Number">
+                <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="stopRecurring()">Submit</button>
+      </span>
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
     </div>
     <!-- /.row -->
 
