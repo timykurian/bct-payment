@@ -103,24 +103,23 @@
                    id="paymentDetails">
                 <thead>
                 <tr>
-                    <th>Transaction Id</th>
-                    <th>Token</th>
+                    <th>Order Number</th>
                     <th>Auth Amount</th>
                     <th>Customer</th>
                     <th>Response Code</th>
-                    <th>Order Number</th>
+                    <th>Transaction Id</th>
                 </tr>
                 </thead>
                 <tbody >
 
                 <tr ng-repeat="item in merchantPaymentList track by $index"  >
-                    {{item}}
-                    <td>{{item.transactionId}}</td>
-                    <td>{{item.token}}</td>
+
+                    <td>{{item.orderNumber}}</td>
                     <td>{{item.authAmout}}</td>
                     <td>{{item.customerName}}</td>
                     <td>{{item.responseCode}}</td>
-                    <td>{{item.orderNumber}}</td>
+                    <td>{{item.transactionId}}</td>
+
                 </tr>
                 </tbody>
             </table>
