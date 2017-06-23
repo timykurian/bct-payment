@@ -136,10 +136,10 @@ public class AdminController {
             model.addAttribute("merchantDetails", gson.toJson(sale));
             return new ResponseEntity(model, org.springframework.http.HttpStatus.OK);
         } catch (TwocheckoutException e) {
-            String message = e.toString();
+            model.addAttribute("errorMsg", e.getMessage());
             e.printStackTrace();
+            return new ResponseEntity(model, org.springframework.http.HttpStatus.OK);
         }
-        return null;
     }
 
     @RequestMapping(value = "/merchant/{merchantId}/dashboard/summary", method = RequestMethod.GET)
@@ -154,7 +154,6 @@ public class AdminController {
             model.addAttribute("totalStoppedRecurring", gson.toJson(content.getTotalStoppedRecurring()));
             return new ResponseEntity(model, org.springframework.http.HttpStatus.OK);
         } catch (Exception e) {
-            String message = e.toString();
             e.printStackTrace();
             model.addAttribute("errorMsg", e.getMessage());
             return new ResponseEntity(model, org.springframework.http.HttpStatus.OK);
@@ -173,7 +172,6 @@ public class AdminController {
             model.addAttribute("subscriptions", gson.toJson(list));
             return new ResponseEntity(model, org.springframework.http.HttpStatus.OK);
         } catch (Exception e) {
-            String message = e.toString();
             e.printStackTrace();
             model.addAttribute("errorMsg", e.getMessage());
             return new ResponseEntity(model, org.springframework.http.HttpStatus.OK);
@@ -192,7 +190,6 @@ public class AdminController {
             model.addAttribute("subscriptions", gson.toJson(list));
             return new ResponseEntity(model, org.springframework.http.HttpStatus.OK);
         } catch (Exception e) {
-            String message = e.toString();
             e.printStackTrace();
             model.addAttribute("errorMsg", e.getMessage());
             return new ResponseEntity(model, org.springframework.http.HttpStatus.OK);

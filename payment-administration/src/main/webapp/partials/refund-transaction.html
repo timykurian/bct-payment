@@ -6,7 +6,7 @@
         </div>
         <div class="col-lg-6">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Order Number">
+                <input type="text" class="form-control" placeholder="Order Number" ng-model="orderNo">
                 <span class="input-group-btn">
         <button class="btn btn-default" type="button" ng-click="refundTransaction()">Submit</button>
       </span>
@@ -16,9 +16,16 @@
     </div>
     <!-- /.row -->
 
+    <br/>
+    <br/>
+
     {{orderDetails.response_message | uppercase}}
 
-    {{errorMsg}}
+    <div class="row">
+        <div class="col-lg-12" style="color:red">
+            {{errorMsg}}
+        </div>
+    </div>
 
 
 </div>

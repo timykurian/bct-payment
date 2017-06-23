@@ -87,7 +87,11 @@ app.controller('adminCtrl', ['$rootScope','$scope','$http','adminService', funct
             url :reqUrl
         }).then(function successCallback(response) {
           if(response.data != null){
-              $scope.orderDetails  = JSON.parse(response.data.merchantDetails);
+              if (response.data.errorMsg == "") {
+                  $scope.orderDetails = JSON.parse(response.data.merchantDetails);
+              } else {
+                  $scope.errorMsg = response.data.errorMsg;
+              }
            }
         }, function errorCallback(response) {
             console.log(response.statusText);
