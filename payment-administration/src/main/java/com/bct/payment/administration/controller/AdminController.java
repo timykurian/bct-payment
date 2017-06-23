@@ -11,7 +11,6 @@ import com.twocheckout.Twocheckout;
 import com.twocheckout.TwocheckoutException;
 import com.twocheckout.TwocheckoutResponse;
 import com.twocheckout.model.Sale;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -152,6 +151,7 @@ public class AdminController {
             model.addAttribute("totalOrderCount", gson.toJson(content.getTotalTransactions()));
             model.addAttribute("totalRecurringOrderCount", gson.toJson(content.getTotalSubscriptions()));
             model.addAttribute("totalRefunds", gson.toJson(content.getTotalRefunds()));
+            model.addAttribute("totalStoppedRecurring", gson.toJson(content.getTotalStoppedRecurring()));
             return new ResponseEntity(model, org.springframework.http.HttpStatus.OK);
         } catch (Exception e) {
             String message = e.toString();
@@ -199,6 +199,58 @@ public class AdminController {
         }
     }
 
+
+    /**
+     * @param merchantId
+     * @param saleId
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/merchant/{merchantId}/stopRecurring/{saleId}", method = RequestMethod.GET)
+    public HttpEntity<ResponseEntity> stopRecurring(@PathVariable int merchantId, @PathVariable String saleId, ModelMap model) {
+        Gson gson = new Gson();
+        setAccessMode();
+        try {
+            TwoCheckoutService checkoutService = new TwoCheckoutService(configurationHelper);
+            TwocheckoutResponse twocheckoutResponse = checkoutService.stopRecurring(saleId);
+            model.addAttribute("orderDetails", gson.toJson(twocheckoutResponse));
+            model.addAttribute("errorMsg", "");
+            try {
+                boolean statusUpdated = paymentCoreService.updateRecurringStatus(saleId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return new ResponseEntity(model, org.springframework.http.HttpStatus.OK);
+        } catch (TwocheckoutException e) {
+            e.printStackTrace();
+            if (e.getMessage().contains("NO ACTIVE RECURRING LINEITEMS")) {
+                model.addAttribute("errorMsg", "No active recurring lineitems");
+            } else {
+                model.addAttribute("errorMsg", "Recurring billing stop could not be processesd");
+            }
+            return new ResponseEntity(model, org.springframework.http.HttpStatus.OK);
+        }
+
+    }
+
+
+    @RequestMapping(value = "/merchant/{merchantId}/dashboard/recurringStoppedTransactions", method = RequestMethod.GET)
+    public HttpEntity<ResponseEntity> searchRecurringStoppedTransactions(@PathVariable int merchantId, ModelMap model) {
+
+        Gson gson = new Gson();
+        try {
+            PaymentTransaction paymentTransaction = new PaymentTransaction();
+            paymentTransaction.setMerchantId(merchantId);
+            List<PaymentTransaction> list = paymentCoreService.searchStoppedRecurringTransactions(paymentTransaction);
+            model.addAttribute("recurringStoppedTransactions", gson.toJson(list));
+            return new ResponseEntity(model, org.springframework.http.HttpStatus.OK);
+        } catch (Exception e) {
+            String message = e.toString();
+            e.printStackTrace();
+            model.addAttribute("errorMsg", e.getMessage());
+            return new ResponseEntity(model, org.springframework.http.HttpStatus.OK);
+        }
+    }
 
 
 

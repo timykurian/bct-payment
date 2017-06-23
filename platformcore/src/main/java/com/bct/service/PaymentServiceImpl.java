@@ -7,7 +7,6 @@ import com.bct.model.MerchantConfig;
 import com.bct.model.PaymentTransaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -132,4 +131,35 @@ public class PaymentServiceImpl {
         }
         return content;
     }
+
+
+    /**
+     * @param saleId
+     * @return
+     */
+    public boolean updateRecurringStatus(String saleId) {
+        boolean updated = false;
+        try {
+            updated = paymentPlatformDAO.updateRecurringStatus(saleId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return updated;
+    }
+
+    /**
+     * @param paymentTransaction
+     * @return
+     */
+    public List<PaymentTransaction> searchStoppedRecurringTransactions(PaymentTransaction paymentTransaction) {
+        List<PaymentTransaction> paymentTransactions = null;
+        try {
+            paymentTransactions = paymentPlatformDAO.searchStoppedRecurringTransactions(paymentTransaction);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return paymentTransactions;
+    }
+
 }

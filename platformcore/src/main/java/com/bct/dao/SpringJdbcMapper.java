@@ -5,14 +5,9 @@ import com.bct.model.PaymentTransaction;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 
-import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.TimeZone;
 
 /**
  * Created by timy on 6/8/17.
@@ -104,6 +99,7 @@ public class SpringJdbcMapper {
             ps.setString(4, paymentTransaction.getBillingEndDate());
             ps.setString(5, paymentTransaction.getProductId());
             ps.setString(6, paymentTransaction.getProductDesc());
+            ps.setString(7, paymentTransaction.getOrderNumber());
         }
     }
 
@@ -120,5 +116,22 @@ public class SpringJdbcMapper {
             ps.setString(1, this.saleId);
         }
     }
+
+    /**
+     *
+     */
+    public static class StoppedRecurringTransactionRowMapper implements RowMapper<PaymentTransaction> {
+        public PaymentTransaction mapRow(ResultSet rs, int rowNum) throws SQLException {
+            PaymentTransaction paymentTransaction = new PaymentTransaction();
+            paymentTransaction.setAuthAmout(rs.getBigDecimal("AUTH_AMOUNT"));
+            paymentTransaction.setTransactionId(rs.getString("TRANSACTIONID"));
+            paymentTransaction.setResponseCode(rs.getString("RESPONSE_CODE"));
+            paymentTransaction.setToken(rs.getString("TOKEN"));
+            paymentTransaction.setCustomerName(rs.getString("CUSTOMER_NAME"));
+            paymentTransaction.setOrderNumber(rs.getString("ORDER_ID"));
+            return paymentTransaction;
+        }
+    }
+
 
 }

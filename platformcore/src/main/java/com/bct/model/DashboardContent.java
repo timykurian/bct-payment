@@ -12,6 +12,15 @@ public class DashboardContent {
     private Integer cancellationsThisMonth;
     private BigDecimal transactionTotal;
     private Integer totalRefunds;
+    private Integer totalStoppedRecurring;
+
+    public Integer getTotalStoppedRecurring() {
+        return totalStoppedRecurring;
+    }
+
+    public void setTotalStoppedRecurring(Integer totalStoppedRecurring) {
+        this.totalStoppedRecurring = totalStoppedRecurring;
+    }
 
     public Integer getTotalRefunds() {
         return totalRefunds;

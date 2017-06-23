@@ -56,8 +56,9 @@ public class PaymentDAOQuery {
             "billing_frequency, " +//3
             "billing_endDate, " +//4
             "product_id, " +//5
-            "product_desc" +//6
-            ") Values (?, ?, now(), ?, ?, ?, ?)";
+            "product_desc," +//6
+            "ORDER_ID" +
+            ") Values (?, ?, now(), ?, ?, ?, ?,?)";
 
     public static String updateRefundStatus = "Update Payment_Transactions " +
             " Set Is_Refunded = 1 Where Order_Id = ?";
@@ -73,6 +74,15 @@ public class PaymentDAOQuery {
     public static String totalAmount = "select sum(auth_amount) from payment_transactions where MERCHANT_ID = ?";
     public static String getSysConfigs = "select config_app, config_name, config_value from configurations";
     public static String getPaymentId = "Select PaymentId From Payment_Transactions Where Order_Id = ?";
+
+    public static String updateRecurringEndStatus = " update subscriptions set billing_endDate=now() where ORDER_ID = ? ";
+
+    public static String totalStoppedRecurring = " select count(*) as totalStoppedRecurring from subscriptions " +
+            "where  billing_endDate IS NOT NULL and order_id in (select ORDER_ID from payment_transactions where MERCHANT_ID = ? )";
+
+    public static String searchStoppedRecurringTransactions = "select  TRANSACTIONID , TOKEN , AUTH_AMOUNT , CUSTOMER_NAME , " +
+            " RESPONSE_CODE , ORDER_ID  from payment_transactions where MERCHANT_ID = ?  " +
+            " and ORDER_ID in (select ORDER_ID from subscriptions where billing_endDate is not null)";
 
 
 }

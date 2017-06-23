@@ -10,6 +10,7 @@ var merchantPaymentList = [];
 var totalOrderCount = 0 ;
 var totalRecurringOrderCount = 0 ;
 var totalRefunds = 0;
+var totalStoppedRecurring = 0;
 
 /**
  * Configure the Routes
@@ -21,6 +22,7 @@ app.config(['$routeProvider', function ($routeProvider) {
     // Pages
       .when("/refund-transaction", {templateUrl: "partials/refund-transaction.html", controller: "adminCtrl"})
       .when("/transaction-details", {templateUrl: "partials/transaction-details.html", controller: "adminCtrl"})
+      .when("/stop-recurring", {templateUrl: "partials/stop-recurring.html", controller: "adminCtrl"})
       .when("/blank", {templateUrl: "partials/blank.html", controller: "adminCtrl"})
     // else 404
     .otherwise("/404", {templateUrl: "partials/404.html", controller: "adminCtrl"});
@@ -124,6 +126,7 @@ app.controller('adminCtrl', ['$rootScope','$scope','$http','adminService', funct
             $rootScope.totalOrderCount = response.data.totalOrderCount;
             $rootScope.totalRecurringOrderCount = response.data.totalRecurringOrderCount;
             $rootScope.totalRefunds = response.data.totalRefunds;
+            $rootScope.totalStoppedRecurring = response.data.totalStoppedRecurring;
         }, function errorCallback(response) {
             console.log(response.statusText);
         });
@@ -157,6 +160,36 @@ app.controller('adminCtrl', ['$rootScope','$scope','$http','adminService', funct
         });
     };
 
+    $scope.stopRecurring = function () {
+        var reqUrl = 'admin/merchant/0/stopRecurring/' + $scope.orderNo;
+        return $http({
+            method: 'GET',
+            url: reqUrl
+        }).then(function successCallback(response) {
+            if (response.data != null) {
+                if (response.data.errorMsg == "") {
+                    $scope.orderDetails = JSON.parse(response.data.orderDetails);
+                } else {
+                    $scope.errorMsg = response.data.errorMsg;
+                }
+            }
+        }, function errorCallback(response) {
+            console.log(response.statusText);
+        });
+    };
+
+    $scope.searchStoppedRecurring = function () {
+        var reqUrl = 'admin/merchant/0/dashboard/recurringStoppedTransactions';
+        return $http({
+            method: 'GET',
+            url: reqUrl
+        }).then(function successCallback(response) {
+            console.log(response);
+            $rootScope.merchantPaymentList = JSON.parse(response.data.recurringStoppedTransactions);
+        }, function errorCallback(response) {
+            console.log(response.statusText);
+        });
+    }
 
 
 

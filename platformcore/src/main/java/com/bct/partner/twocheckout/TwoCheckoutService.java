@@ -1,9 +1,9 @@
 package com.bct.partner.twocheckout;
 
-import com.bct.utils.PaymentConfigurationHelper;
 import com.bct.core.exception.TwoCheckOutException;
 import com.bct.model.Lineitems;
 import com.bct.model.PaymentTransaction;
+import com.bct.utils.PaymentConfigurationHelper;
 import com.google.gson.Gson;
 import com.twocheckout.*;
 import com.twocheckout.model.Authorization;
@@ -90,14 +90,14 @@ public class TwoCheckoutService {
             String currentTime = sdf.format(endDate);
 
             paymentTransaction.setBillingFrequency("MM");
-            paymentTransaction.setBillingEndDate(currentTime);
+            // paymentTransaction.setBillingEndDate(currentTime);
 
             List arrays = new ArrayList();
             arrays.add(lineitem);
 
             HashMap request = new HashMap();
             request.put("sellerId", configHelper.getStringValue("PARTNER", "SELLER_ID"));
-            request.put("merchantOrderId", "test123");
+            request.put("merchantOrderId", "");
             request.put("token", paymentTransaction.getToken());
             request.put("currency", configHelper.getStringValue("SYSTEM", "DEFAULT_CURRENCY_CODE"));
             request.put("total", paymentTransaction.getAuthAmout());
@@ -125,7 +125,7 @@ public class TwoCheckoutService {
         
         TwocheckoutResponse twocheckoutResponse = null;
         HashMap params_refund = new HashMap();
-        params_refund.put("comment", "test");
+        params_refund.put("comment", "Refund Transaction");
         params_refund.put("category", "1");
         try {
             Gson gson = new Gson();
@@ -154,5 +154,31 @@ public class TwoCheckoutService {
             throw new TwocheckoutException(e.getMessage());
         }
         return sale;
+    }
+
+    /**
+     * @param saleId
+     * @return
+     * @throws TwocheckoutException
+     */
+    public TwocheckoutResponse stopRecurring(String saleId) throws TwocheckoutException {
+
+        TwocheckoutResponse twocheckoutResponse = null;
+        HashMap params_refund = new HashMap();
+        params_refund.put("comment", "Stop Recurring Transaction");
+        params_refund.put("category", "1");
+        try {
+            Gson gson = new Gson();
+            Sale sale2 = TwocheckoutSale.retrieve(saleId);
+            twocheckoutResponse = sale2.stop();
+            System.out.println(twocheckoutResponse.getResponseMessage());
+            System.out.println(gson.toJson(twocheckoutResponse));
+        } catch (TwocheckoutException e) {
+            String message = e.toString();
+            e.printStackTrace();
+            throw new TwocheckoutException(message);
+        }
+
+        return twocheckoutResponse;
     }
 }

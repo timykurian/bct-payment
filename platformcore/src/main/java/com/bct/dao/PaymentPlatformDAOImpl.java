@@ -1,16 +1,17 @@
 package com.bct.dao;
 
-import com.bct.core.exception.PaymentPlatformDAOException;
-import com.bct.utils.PaymentDAOQuery;
 import com.bct.core.exception.BaseException;
+import com.bct.core.exception.PaymentPlatformDAOException;
 import com.bct.model.DashboardContent;
 import com.bct.model.MerchantConfig;
 import com.bct.model.PaymentTransaction;
+import com.bct.utils.PaymentDAOQuery;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by timy on 5/25/17.
@@ -137,6 +138,10 @@ public class PaymentPlatformDAOImpl {
             for (Map row : rows) {
                 content.setTotalRefunds((Integer.parseInt(row.get("totalRefunds").toString())));
             }
+            rows = jdbcTemplate.queryForList(PaymentDAOQuery.totalStoppedRecurring, new Object[]{merchantId});
+            for (Map row : rows) {
+                content.setTotalStoppedRecurring((Integer.parseInt(row.get("totalStoppedRecurring").toString())));
+            }
         } catch (Exception e) {
             e.printStackTrace();
             throw new PaymentPlatformDAOException(e);
@@ -158,5 +163,36 @@ public class PaymentPlatformDAOImpl {
         return (rowsAffected > 0) ? true : false;
     }
 
+    public boolean updateRecurringStatus(String saleId) throws PaymentPlatformDAOException {
 
+        int rowsAffected = 0;
+        try {
+            rowsAffected = jdbcTemplate.update(PaymentDAOQuery.updateRecurringEndStatus,
+                    new SpringJdbcMapper.RefundStatusSetter(saleId));
+        } catch (Exception e) {
+            throw new PaymentPlatformDAOException(e);
+        }
+
+        return (rowsAffected > 0) ? true : false;
+    }
+
+    /**
+     * @param paymentTransaction
+     * @return
+     * @throws PaymentPlatformDAOException
+     */
+    public List<PaymentTransaction> searchStoppedRecurringTransactions(PaymentTransaction paymentTransaction) throws PaymentPlatformDAOException {
+        List<PaymentTransaction> paymentTransactions = null;
+        try {
+            //if (paymentTransaction.getMerchantId() > 0) {
+            paymentTransactions = jdbcTemplate.query(PaymentDAOQuery.searchStoppedRecurringTransactions, new Object[]{paymentTransaction.getMerchantId()},
+                    new SpringJdbcMapper.StoppedRecurringTransactionRowMapper());
+           /* } else {
+                throw new PaymentPlatformDAOException(BaseException.MERCHANT_ID_MISSING);
+            }*/
+        } catch (Exception e) {
+            throw new PaymentPlatformDAOException(e.getMessage());
+        }
+        return paymentTransactions;
+    }
 }
