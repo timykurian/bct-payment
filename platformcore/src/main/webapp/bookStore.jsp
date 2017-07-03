@@ -19,6 +19,7 @@
     <input type="hidden" name="merchantId" id="merchantId" value="Books Store"/>
     <input type="hidden" name="amount" id="amount"/>
     <input type="hidden" name="productName" id="productName"/>
+    <input type="hidden" name="type" id="type"/>
     <input type="hidden" name="productDesc" id="productDesc"/>
     <input type="hidden" name="remarks" id="remarks" value="Book Purchase"/>
     <input type="hidden" name="customerName" id="customerName" value="Alegra Velava"/>
@@ -65,7 +66,8 @@
     <div class="col-md-1">&nbsp;</div>
     <div class="col-md-3" id="book1">
         <div class="panel panel-default" style="border: 1px solid darkblue;">
-            <a onClick="submitForm(7.85, 'Seed to Harvest by Octavia', 'By Octavia Butler', '#booksForm', 'static/img/bookStore/9781453271759.jpg');"
+            <a onClick="submitForm(7.85, 'Seed to Harvest by Octavia', 'By Octavia Butler', '#booksForm',
+             'static/img/bookStore/9781453271759.jpg','auth');"
                href="#">
                 <div class="panel-heading"
                      style="background-image: linear-gradient(to bottom, #337ab7 0, #e8e8e8 100%);">
@@ -84,7 +86,8 @@
     </div>
     <div class="col-md-3" id="book2">
         <div class="panel panel-default" style="border: 1px solid darkblue;">
-            <a onClick="submitForm(5.25, 'The Fix by David', 'By David Baldacci', '#booksForm', 'static/img/bookStore/9781455586554.jpg');"
+            <a onClick="submitForm(5.25, 'The Fix by David', 'By David Baldacci', '#booksForm',
+             'static/img/bookStore/9781455586554.jpg','auth');"
                href="#">
                 <div class="panel-heading"
                      style="background-image: linear-gradient(to bottom, #337ab7 0, #e8e8e8 100%);">
@@ -103,7 +106,8 @@
     </div>
     <div class="col-md-3" id="book3">
         <div class="panel panel-default" style="border: 1px solid darkblue;">
-            <a onClick="submitForm(6, 'Blue Skies by Robyn', 'By Robyn Carr', '#booksForm', 'static/img/bookStore/9781459256613.jpg');"
+            <a onClick="submitForm(6, 'Blue Skies by Robyn', 'By Robyn Carr', '#booksForm',
+             'static/img/bookStore/9781459256613.jpg','auth');"
                href="#">
                 <div class="panel-heading"
                      style="background-image: linear-gradient(to bottom, #337ab7 0, #e8e8e8 100%);">
@@ -126,11 +130,12 @@
     <div class="col-md-1">&nbsp;</div>
     <div class="col-md-3" id="book4">
         <div class="panel panel-default" style="border: 1px solid darkblue;">
-            <a onClick="submitForm(6.80, 'Shtum by Jem Lester', 'By Jem Lester', '#booksForm', 'static/img/bookStore/9781468314717.jpg');"
+            <a onClick="submitForm(6.80, 'Shtum by Jem Lester', 'By Jem Lester', '#booksForm',
+             'static/img/bookStore/9781468314717.jpg','recurring');"
                href="#">
                 <div class="panel-heading"
                      style="background-image: linear-gradient(to bottom, #337ab7 0, #e8e8e8 100%);">
-                    <span>Subscibe  Shtum</span>
+                    <span>Subscribe  Shtum</span>
                     <span class="pull-right">$6.80</span>
                 </div>
             </a>
@@ -145,12 +150,13 @@
     </div>
     <div class="col-md-3" id="book5">
         <div class="panel panel-default" style="border: 1px solid darkblue;">
-            <a onClick="submitForm(3.25, 'Crazy Horse and Custer by Stephen Ambrose', 'By Stephen Ambrose', '#booksForm', 'static/img/bookStore/9781497659254.jpg');"
+            <a onClick="submitForm(3, 'Crazy Horse and Custer by Stephen Ambrose', 'By Stephen Ambrose',
+            '#booksForm', 'static/img/bookStore/9781497659254.jpg','recurring');"
                href="#">
                 <div class="panel-heading"
                      style="background-image: linear-gradient(to bottom, #337ab7 0, #e8e8e8 100%);">
-                    <span>Crazy Horse and Custer</span>
-                    <span class="pull-right">$3.25</span>
+                    <span>Subscribe Crazy Horse and Custer</span>
+                    <span class="pull-right">$3</span>
                 </div>
             </a>
             <div class="panel-body">
@@ -164,7 +170,8 @@
     </div>
     <div class="col-md-3" id="book6">
         <div class="panel panel-default" style="border: 1px solid darkblue;">
-            <a onClick="submitForm(4.0, 'Doctored Evidence by Donna Leon', 'By Donna Leon', '#booksForm', 'static/img/bookStore/9781497659254.jpg');"
+            <a onClick="submitForm(4.0, 'Doctored Evidence by Donna Leon', 'By Donna Leon', '#booksForm',
+            'static/img/bookStore/9781497659254.jpg','auth');"
                href="#">
                 <div class="panel-heading"
                      style="background-image: linear-gradient(to bottom, #337ab7 0, #e8e8e8 100%);">
@@ -187,11 +194,12 @@
     <div class="col-md-1">&nbsp;</div>
     <div class="col-md-3" id="book7">
         <div class="panel panel-default" style="border: 1px solid darkblue;">
-            <a onClick="submitForm(7.85, 'Seed to Harvest by Octavia,Butler', 'By Octavia,Butler', '#booksForm', 'static/img/bookStore/9781453271759.jpg');"
+            <a onClick="submitForm(7.85, 'Seed to Harvest by Octavia,Butler', 'By Octavia,Butler', '#booksForm',
+            'static/img/bookStore/9781453271759.jpg','recurring');"
                href="#">
                 <div class="panel-heading"
                      style="background-image: linear-gradient(to bottom, #337ab7 0, #e8e8e8 100%);">
-                    <span>Seed to Harvest</span>
+                    <span>Subscribe Seed to Harvest</span>
                     <span class="pull-right">$7.85</span>
                 </div>
             </a>
@@ -202,7 +210,8 @@
     </div>
     <div class="col-md-3" id="book8">
         <div class="panel panel-default" style="border: 1px solid darkblue;">
-            <a onClick="submitForm(5.25, 'The Fix by David Baldacci', 'By David Baldacci', '#booksForm', 'static/img/bookStore/9781455586554.jpg');"
+            <a onClick="submitForm(5.25, 'The Fix by David Baldacci', 'By David Baldacci', '#booksForm',
+            'static/img/bookStore/9781455586554.jpg','auth');"
                href="#">
                 <div class="panel-heading"
                      style="background-image: linear-gradient(to bottom, #337ab7 0, #e8e8e8 100%);">
@@ -217,11 +226,12 @@
     </div>
     <div class="col-md-3" id="book9">
         <div class="panel panel-default" style="border: 1px solid darkblue;">
-            <a onClick="submitForm(6, 'Blue Skies by Robyn Carr', 'By Robyn Carr', '#booksForm', 'static/img/bookStore/9781459256613.jpg');"
+            <a onClick="submitForm(6, 'Blue Skies by Robyn Carr', 'By Robyn Carr', '#booksForm',
+             'static/img/bookStore/9781459256613.jpg','recurring');"
                href="#">
                 <div class="panel-heading"
                      style="background-image: linear-gradient(to bottom, #337ab7 0, #e8e8e8 100%);">
-                    <span>Blue Skies</span>
+                    <span>Subscribe Blue Skies</span>
                     <span class="pull-right">$6.0</span>
                 </div>
             </a>
@@ -241,12 +251,13 @@
 
 <script>
 
-    function submitForm(amount, productName, productDesc, formId, productUrl) {
-
+    function submitForm(amount, productName, productDesc, formId, productUrl, type) {
+        console.log("Book store type -" + type);
         $('#amount').val(amount);
         $('#productName').val(productName);
         $('#productDesc').val(productDesc);
         $('#productUrl').val(productUrl);
+        $('#type').val(type);
         $(formId).submit();
     }
 

@@ -67,11 +67,13 @@ public class PaymentPlatformDAOImpl {
         try {
             StringBuilder query = new StringBuilder(PaymentDAOQuery.searchPaymentTransactionQry_detail);
             if (paymentTransaction.getIsRecurring() != null && paymentTransaction.getIsRecurring() > 0) {
-                query.append(" and IS_RECURRING = 1");
+                query.append(" and is_recurring = 1 and  order_id in (select order_id from subscriptions where billing_enddate is  null) \n");
             }
             if (paymentTransaction.getIsRefund() != null && paymentTransaction.getIsRefund() > 0) {
-                query.append(" and Is_Refunded = 1");
+                query.append(" and is_refunded = 1");
             }
+            query.append(" order by transaction_date desc");
+
             paymentTransactions = jdbcTemplate.query(query.toString(),
                     new Object[]{paymentTransaction.getMerchantId()},
                     new SpringJdbcMapper.PaymentTransactionRowMapper());

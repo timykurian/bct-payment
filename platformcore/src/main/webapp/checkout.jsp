@@ -56,7 +56,6 @@
                             <label class="label" for="serviceProvider">Service Provider</label>
                         </div>
                         <div class="col-lg-6">
-                            <input type="hidden" id="type" name="type" size="0">
                             <input type="hidden" id="serviceProvider" name="merchantId" value="${merchantId}" size="40">
                             <p class="label"><strong>${merchantId}</strong></p>
                         </div>
@@ -77,6 +76,7 @@
                         <div class="col-lg-6">
                             <input type="hidden" id="productName" name="productName" value="${productName}" size="40">
                             <p class="label"><strong>${productName}</strong></p>
+                            <input type="hidden" id="type" name="type" value="${type}" size="0">
                         </div>
                         <div class="col-lg-2">&nbsp;</div>
                     </div>
@@ -245,7 +245,8 @@
     var successCallback = function (data) {
 
         $("#token").val(data['response']['token']['token']);
-        $("#type").val(($("#productName").val() == "Shtum by Jem Lester" ? "recurring" : "auth"));
+        // console.log("Subrecurring ?"+$("#productName").val().search("Subscribe"))
+        //   $("#type").val(($("#productName").val().indexOf("Subscribe") != -1 ? "recurring" : "auth"));
         $('#checkoutForm').submit();
     };
 

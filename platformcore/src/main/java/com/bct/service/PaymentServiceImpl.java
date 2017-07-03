@@ -36,6 +36,7 @@ public class PaymentServiceImpl {
         try {
             paymentPlatformDAO.savePaymentTransaction(paymentTransaction);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new PaymentPlatformDAOException(e.getMessage());
         }
 

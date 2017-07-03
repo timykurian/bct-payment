@@ -53,6 +53,7 @@ public class LandingServlet extends HttpServlet {
         request.setAttribute("postalCode", request.getParameter("postalCode"));
         request.setAttribute("mobile", request.getParameter("mobile"));
         request.setAttribute("email", request.getParameter("email"));
+        request.setAttribute("type", request.getParameter("type"));
 
         request.getRequestDispatcher("checkout.jsp").forward(request, response);
     }

@@ -11,6 +11,7 @@ var totalOrderCount = 0 ;
 var totalRecurringOrderCount = 0 ;
 var totalRefunds = 0;
 var totalStoppedRecurring = 0;
+var orderDetails = {};
 
 /**
  * Configure the Routes
@@ -86,7 +87,10 @@ app.controller('adminCtrl', ['$rootScope','$scope','$http','adminService', funct
             method : 'GET',
             url :reqUrl
         }).then(function successCallback(response) {
+            console.log(response);
+            console.log(response.data.merchantDetails);
           if(response.data != null){
+              $scope.orderDetails = JSON.parse(response.data.merchantDetails);
               if (response.data.errorMsg == "") {
                   $scope.orderDetails = JSON.parse(response.data.merchantDetails);
               } else {

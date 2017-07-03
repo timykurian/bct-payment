@@ -1,11 +1,10 @@
 package com.bct.core.servlet;
 
-import com.bct.core.exception.PaymentPlatformDAOException;
-import com.bct.utils.NumberUtil;
 import com.bct.core.exception.NotSupportedException;
 import com.bct.model.PaymentTransaction;
 import com.bct.partner.twocheckout.TwoCheckoutService;
 import com.bct.service.PaymentServiceImpl;
+import com.bct.utils.NumberUtil;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -64,6 +63,7 @@ public class CheckoutServlet extends HttpServlet {
                     paymentTransaction = checkoutService.authorize(paymentTransaction);
                 }
             } catch (Exception e) {
+                e.printStackTrace();
                 paymentTransaction.setResponseMsg(e.getMessage().substring(0, 100));
                 request.setAttribute("status", "failure");
                 request.getRequestDispatcher("bookStore.jsp")
@@ -72,7 +72,8 @@ public class CheckoutServlet extends HttpServlet {
             request.setAttribute("response", paymentTransaction.getResponseMsg());
             try {
                 paymentCoreService.savePaymentTransaction(paymentTransaction);
-            } catch (PaymentPlatformDAOException e) {
+            } catch (Throwable e) {
+                e.printStackTrace();
                 request.setAttribute("status", "failure");
                 request.getRequestDispatcher("bookStore.jsp")
                         .forward(request, response);

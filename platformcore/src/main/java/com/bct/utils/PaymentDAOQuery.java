@@ -5,84 +5,87 @@ package com.bct.utils;
  */
 public class PaymentDAOQuery {
 
-    public static String searchPaymentTransactionQry_summary = "select MERCHANT_ID,TRANSACTION_DATE,sum(AUTH_AMOUNT) as AUTH_AMOUNT " +
-            " from PAYMENT_TRANSACTIONS where  merchant_id =?";
-    public static String searchPaymentTransactionQry_summary_grpBy = " group by MERCHANT_ID,TRANSACTION_DATE";
+    public static String searchPaymentTransactionQry_summary = "select merchant_id,transaction_date,sum(auth_amount) as auth_amount " +
+            " from payment_transactions where  merchant_id =?";
+    public static String searchPaymentTransactionQry_summary_grpBy = " group by merchant_id,transaction_date";
     public static String searchPaymentTransactionQry_detail = "select " +
-            "AUTH_AMOUNT," + //1
-            "TOKEN," + //2
-            "CCEXP," +//3
-            "PAYMENT_FACILITATOR_ID," +//4
-            "TRANSACTION_TYPE," +//5
-            "CURRENCY_CODE," +//6
-            "COUNTRY_CODE," +//7
-            "RESPONSE_CODE," +//8
-            "CUSTOMER_NAME," +//9
-            "ADDRESS1," +//10
-            "ADDRESS2," +//11
-            "CITY," +//12
-            "STATE," +//13
-            "ZIP_CODE," +//14
-            "TRANSACTIONID," +//15
-            "MERCHANT_ID,ORDER_ID" +//16
-            " from PAYMENT_TRANSACTIONS where  merchant_id =? ";
-    public static String savePaymentTransactionQry = "INSERT INTO PAYMENT_TRANSACTIONS " +
+            "auth_amount," + //1
+            "token," + //2
+            "ccexp," +//3
+            "payment_facilitator_id," +//4
+            "transaction_type," +//5
+            "currency_code," +//6
+            "country_code," +//7
+            "response_code," +//8
+            "customer_name," +//9
+            "address1," +//10
+            "address2," +//11
+            "city," +//12
+            "state," +//13
+            "zip_code," +//14
+            "transactionid," +//15
+            "merchant_id,order_id" +//16
+            " from payment_transactions where  merchant_id =? ";
+    public static String savePaymentTransactionQry = "insert into payment_transactions " +
             "(" +
-            "AUTH_AMOUNT," + //1
-            "TOKEN," + //2
-            "CCEXP," +//3
-            "PAYMENT_FACILITATOR_ID," +//4
-            "TRANSACTION_TYPE," +//5
-            "CURRENCY_CODE," +//6
-            "COUNTRY_CODE," +//7
-            "RESPONSE_CODE," +//8
-            "CUSTOMER_NAME," +//9
-            "ADDRESS1," +//10
-            "ADDRESS2," +//11
-            "CITY," +//12
-            "STATE," +//13
-            "ZIP_CODE," +//14
-            "TRANSACTIONID," +//15
-            "MERCHANT_ID," + //16
-            "ORDER_ID, " +//17
-            "IS_RECURRING, " +//18
-            "TRANSACTION_DATE " +//19
-            ") VALUES (?,?,?,1,'CC',?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
+            "auth_amount," + //1
+            "token," + //2
+            "ccexp," +//3
+            "payment_facilitator_id," +//4
+            "transaction_type," +//5
+            "currency_code," +//6
+            "country_code," +//7
+            "response_code," +//8
+            "customer_name," +//9
+            "address1," +//10
+            "address2," +//11
+            "city," +//12
+            "state," +//13
+            "zip_code," +//14
+            "transactionid," +//15
+            "merchant_id," + //16
+            "order_id, " +//17
+            "is_recurring, " +//18
+            "transaction_date " +//19
+            ") values (?,?,?,1,'cc',?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
 
-    public static String saveSubscription = "Insert Into Subscriptions (" +
+    public static String saveSubscription = "insert into subscriptions (" +
             "subscription_id, " +//1
             "subscription_amount, " + //2
             "subscription_date, " +
             "billing_frequency, " +//3
-            "billing_endDate, " +//4
+            "billing_enddate, " +//4
             "product_id, " +//5
             "product_desc," +//6
-            "ORDER_ID" +
-            ") Values (?, ?, now(), ?, ?, ?, ?,?)";
+            "order_id" +
+            ") values (?, ?, now(), ?, ?, ?, ?,?)";
 
-    public static String updateRefundStatus = "Update Payment_Transactions " +
-            " Set Is_Refunded = 1 Where Order_Id = ?";
-
-
-    public static String searchMerchantConfig = "select id , CONFIG_KEY,CONFIG_VALUE,MERCHANT_ID from merchant_config wheRE merchant_id = ?";
+    public static String updateRefundStatus = "update payment_transactions " +
+            " set is_refunded = 1 where order_id = ?";
 
 
-    public static String totalOrders = "select count(*) totalOrders from payment_transactions where MERCHANT_ID = ?";
-    public static String totalSubscriptions = "select count(*) totalSubscriptions from payment_transactions where MERCHANT_ID = ? and is_recurring = 1";
-    public static String totalCancellations = "select count(*) from payment_transactions where MERCHANT_ID = ?";
-    public static String totalRefunds = "select count(*) as totalRefunds from payment_transactions where MERCHANT_ID = ? and Is_Refunded = 1";
-    public static String totalAmount = "select sum(auth_amount) from payment_transactions where MERCHANT_ID = ?";
+    public static String searchMerchantConfig = "select id , config_key,config_value,merchant_id from merchant_config where merchant_id = ?";
+
+
+    public static String totalOrders = "select count(*) totalorders from payment_transactions where merchant_id = ?";
+    public static String totalSubscriptions = "select count(*) totalsubscriptions from payment_transactions" +
+            " where merchant_id = ? and is_recurring = 1 " +
+            "and order_id in (select order_id from subscriptions where billing_enddate is null) order by transaction_date desc";
+    public static String totalCancellations = "select count(*) from payment_transactions where merchant_id = ?";
+    public static String totalRefunds = "select count(*) as totalrefunds from payment_transactions where merchant_id = ? and is_refunded = 1";
+    public static String totalAmount = "select sum(auth_amount) from payment_transactions where merchant_id = ?";
     public static String getSysConfigs = "select config_app, config_name, config_value from configurations";
-    public static String getPaymentId = "Select PaymentId From Payment_Transactions Where Order_Id = ?";
+    public static String getPaymentId = "select paymentid from payment_transactions where order_id = ?";
 
-    public static String updateRecurringEndStatus = " update subscriptions set billing_endDate=now() where ORDER_ID = ? ";
+    public static String updateRecurringEndStatus = " update subscriptions set billing_enddate=now() where order_id = ? ";
 
-    public static String totalStoppedRecurring = " select count(*) as totalStoppedRecurring from subscriptions " +
-            "where  billing_endDate IS NOT NULL and order_id in (select ORDER_ID from payment_transactions where MERCHANT_ID = ? )";
+    public static String totalStoppedRecurring = " select count(*) as totalstoppedrecurring from subscriptions " +
+            "where  billing_enddate is not null and order_id in (select order_id from payment_transactions where merchant_id = ? )";
 
-    public static String searchStoppedRecurringTransactions = "select  TRANSACTIONID , TOKEN , AUTH_AMOUNT , CUSTOMER_NAME , " +
-            " RESPONSE_CODE , ORDER_ID  from payment_transactions where MERCHANT_ID = ?  " +
-            " and ORDER_ID in (select ORDER_ID from subscriptions where billing_endDate is not null)";
+    public static String searchStoppedRecurringTransactions = "select  transactionid , token , auth_amount , customer_name , " +
+            " response_code , order_id  from payment_transactions where merchant_id = ?  " +
+            " and order_id in (select order_id from subscriptions where billing_enddate is not null)";
 
 
 }
+

@@ -30,13 +30,6 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-    <style>
-        .btn-success {
-            background-color: #dff0d8;
-        }
-
-    </style>
 </head>
 
 <body>
@@ -52,11 +45,12 @@
                     <form role="form">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                <input class="form-control" placeholder="E-mail" name="email" type="email"
+                                       value="merchant@bahwancybertek.com" autofocus>
                             </div>
                             <div class="form-group">
                                 <input class="form-control" placeholder="Password" name="password" type="password"
-                                       value="">
+                                       value="password">
                             </div>
                             <div class="checkbox">
                                 <label>
