@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.bct</OriginalElement>
+  <nodes>
+    <node x="2801.7749999999996" y="1752.5">com.bct.dao.SpringJdbcMapper.SubscriptionValuesSetter</node>
+    <node x="1057.525" y="1775.0">com.bct.core.exception</node>
+    <node x="610.3643518518522" y="2692.0">com.bct.partner.twocheckout</node>
+    <node x="923.25" y="1775.0">com.bct.transport.vo</node>
+    <node x="1732.5249999999999" y="671.0">com.bct.model.MerchantConfig</node>
+    <node x="0.0" y="3044.0">com.bct.model.PaymentConfiguration</node>
+    <node x="1425.0" y="3044.0">com.bct.utils.StringValidator</node>
+    <node x="1226.525" y="1643.0">com.bct.model.DashboardContent</node>
+    <node x="948.0" y="3044.0">com.bct.core.ErrorHandler</node>
+    <node x="468.0" y="1709.0">com.bct.model.Options</node>
+    <node x="2300.816750841751" y="0.0">com.bct.model.PaymentTransaction</node>
+    <node x="4104.775" y="1764.0">com.bct.dao.SpringJdbcMapper.StoppedRecurringTransactionRowMapper</node>
+    <node x="2531.0" y="3044.0">com.bct.utils.PaymentDAOQuery</node>
+    <node x="3573.7749999999996" y="1752.5">com.bct.dao.SpringJdbcMapper.PaymentTransactionPreparedStatementSetter</node>
+    <node x="1733.8529882154885" y="2571.0">com.bct.service.PaymentServiceImpl</node>
+    <node x="2437.7749999999996" y="1764.0">com.bct.dao.SpringJdbcMapper.PaymentTransactionRowMapper</node>
+    <node x="2155.7749999999996" y="1752.5">com.bct.dao.SpringJdbcMapper.RefundStatusSetter</node>
+    <node x="352.0" y="3044.0">com.bct.utils.NumberUtil</node>
+    <node x="1755.5249999999999" y="1764.0">com.bct.dao.SpringJdbcMapper.MerchantConfigRowMapper</node>
+    <node x="2955.0" y="3044.0">com.bct.utils.PaymentHelper</node>
+    <node x="1845.8125" y="2903.0">com.bct.core.servlet.CheckoutServlet</node>
+    <node x="74.0" y="2194.0">com.bct.utils.PaymentConfigurationHelper</node>
+    <node x="2352.2749999999996" y="2139.0">com.bct.dao.PaymentPlatformDAOImpl</node>
+    <node x="2071.0" y="3044.0">com.bct.paypal.PaypalCheckoutService</node>
+    <node x="2309.0" y="3044.0">com.bct.payment.administration</node>
+    <node x="2744.0" y="3044.0">com.bct.dao.SpringJdbcMapper</node>
+    <node x="3207.7749999999996" y="1764.0">com.bct.dao.SpringJdbcMapper.PaymentTransactionSummaryReportRowMapper</node>
+    <node x="322.0" y="2007.0">com.bct.model.Lineitems</node>
+    <node x="706.0" y="3044.0">com.bct.core.BaseFilter</node>
+    <node x="0.0" y="1753.0">com.bct.utils.PaymentConfigurationHelper.ConfigurationMapper</node>
+    <node x="1751.0" y="3044.0">com.bct.core.ActivityInterceptor</node>
+    <node x="367.75" y="2903.0">com.bct.controller.PaymentPlatformController</node>
+    <node x="933.0" y="2216.0">com.bct.core.servlet.LandingServlet</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="1.0" x="1800.0" y="1605.0" />
+  <SelectedNodes>
+    <node>com.bct.dao.SpringJdbcMapper.SubscriptionValuesSetter</node>
+    <node>com.bct.core.exception</node>
+    <node>com.bct.partner.twocheckout</node>
+    <node>com.bct.transport.vo</node>
+    <node>com.bct.model.MerchantConfig</node>
+    <node>com.bct.model.PaymentConfiguration</node>
+    <node>com.bct.utils.StringValidator</node>
+    <node>com.bct.model.DashboardContent</node>
+    <node>com.bct.core.ErrorHandler</node>
+    <node>com.bct.model.Options</node>
+    <node>com.bct.model.PaymentTransaction</node>
+    <node>com.bct.dao.SpringJdbcMapper.StoppedRecurringTransactionRowMapper</node>
+    <node>com.bct.utils.PaymentDAOQuery</node>
+    <node>com.bct.dao.SpringJdbcMapper.PaymentTransactionPreparedStatementSetter</node>
+    <node>com.bct.service.PaymentServiceImpl</node>
+    <node>com.bct.dao.SpringJdbcMapper.PaymentTransactionRowMapper</node>
+    <node>com.bct.dao.SpringJdbcMapper.RefundStatusSetter</node>
+    <node>com.bct.utils.NumberUtil</node>
+    <node>com.bct.dao.SpringJdbcMapper.MerchantConfigRowMapper</node>
+    <node>com.bct.utils.PaymentHelper</node>
+    <node>com.bct.core.servlet.CheckoutServlet</node>
+    <node>com.bct.utils.PaymentConfigurationHelper</node>
+    <node>com.bct.dao.PaymentPlatformDAOImpl</node>
+    <node>com.bct.paypal.PaypalCheckoutService</node>
+    <node>com.bct.payment.administration</node>
+    <node>com.bct.dao.SpringJdbcMapper</node>
+    <node>com.bct.dao.SpringJdbcMapper.PaymentTransactionSummaryReportRowMapper</node>
+    <node>com.bct.model.Lineitems</node>
+    <node>com.bct.core.BaseFilter</node>
+    <node>com.bct.utils.PaymentConfigurationHelper.ConfigurationMapper</node>
+    <node>com.bct.core.ActivityInterceptor</node>
+    <node>com.bct.controller.PaymentPlatformController</node>
+    <node>com.bct.core.servlet.LandingServlet</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
